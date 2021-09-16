@@ -1,31 +1,25 @@
 import { Link } from "react-router-dom";
 
 import styles from "./navigation.module.css";
-export default function Navigation() {
+export default function Navigation({
+  navLinksData = [
+    { name: "home", path: "/" },
+    { name: "coins", path: "/coins" },
+    { name: "collectibles", path: "/collectibles" },
+    { name: "favorites", path: "/favorites" },
+  ],
+}) {
+  const navListItems = navLinksData.map(({ name, path }) => (
+    <li className={styles.navLinkContainer} key={name}>
+      <Link className={styles.navLink} to={path}>
+        {name}
+      </Link>
+    </li>
+  ));
+
   return (
     <nav>
-      <ul className={styles.navBar}>
-        <li className={styles.navLinkContainer}>
-          <Link className={styles.navLink} to="/">
-            Home
-          </Link>
-        </li>
-        <li className={styles.navLinkContainer}>
-          <Link className={styles.navLink} to="/coins">
-            Coins
-          </Link>
-        </li>
-        <li className={styles.navLinkContainer}>
-          <Link className={styles.navLink} to="/collectibles">
-            Collectibles
-          </Link>
-        </li>
-        <li className={styles.navLinkContainer}>
-          <Link className={styles.navLink} to="/favorites">
-            Favorites
-          </Link>
-        </li>
-      </ul>
+      <ul className={styles.navBar}>{navListItems}</ul>
     </nav>
   );
 }
