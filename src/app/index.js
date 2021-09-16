@@ -1,4 +1,12 @@
+import { Route, Switch } from "react-router-dom";
 import Layout from "./layout";
+
 export default function App() {
-  return <Layout />;
+  return (
+    <Switch>
+      <Route path="/">
+        <Layout />
+      </Route>
+    </Switch>
+  );
 }
