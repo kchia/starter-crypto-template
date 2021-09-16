@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
   CoinsList,
@@ -25,6 +25,10 @@ export default function Layout() {
       </div>
       <main className={mainContainer}>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/coins" />
+          </Route>
+
           <Route exact path="/coins">
             <CoinsList />
           </Route>
