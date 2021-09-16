@@ -1,4 +1,8 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+
+import { ErrorFallback } from "../../common/core";
+import { logError } from "../../common/utils";
 
 import {
   CoinsList,
@@ -29,29 +33,43 @@ export default function Layout() {
             <Redirect to="/coins" />
           </Route>
 
-          <Route exact path="/coins">
-            <CoinsList />
-          </Route>
-          <Route path="/coins/:id">
-            <CoinView />
-          </Route>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route exact path="/coins">
+              <CoinsList />
+            </Route>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route path="/coins/:id">
+              <CoinView />
+            </Route>
+          </ErrorBoundary>
 
-          <Route exact path="/collectibles">
-            <CollectiblesList />
-          </Route>
-          <Route path="/collectibles/:id">
-            <CollectibleView />
-          </Route>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route exact path="/collectibles">
+              <CollectiblesList />
+            </Route>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route path="/collectibles/:id">
+              <CollectibleView />
+            </Route>
+          </ErrorBoundary>
 
-          <Route exact path="/favorites">
-            <FavoritesList />
-          </Route>
-          <Route path="/favorites/new">
-            <FavoriteCreate />
-          </Route>
-          <Route path="/favorites/:id/edit">
-            <FavoriteEdit />
-          </Route>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route exact path="/favorites">
+              <FavoritesList />
+            </Route>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route path="/favorites/new">
+              <FavoriteCreate />
+            </Route>
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+            <Route path="/favorites/:id/edit">
+              <FavoriteEdit />
+            </Route>
+          </ErrorBoundary>
 
           <Route path="*">
             <NoMatch />
