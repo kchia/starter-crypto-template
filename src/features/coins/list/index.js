@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
+import { Link } from "react-router-dom";
 
 import { ErrorFallback, Loader } from "../../../common/core";
 import { STATUS } from "../../../common/constants";
@@ -63,10 +64,14 @@ export default function CoinsList() {
         <tr className={tableRow} key={originalAssetId}>
           <td className={tableCell}>{rank}</td>
           <td className={tableCell}>
-            <img className={image} src={imageUrl} alt={name} />
+            <Link to={`/coins/${originalAssetId}`}>
+              <img className={image} src={imageUrl} alt={name} />
+            </Link>
           </td>
           <td>
-            <span>{name}</span>
+            <Link to={`/coins/${originalAssetId}`}>
+              <span>{name}</span>
+            </Link>
           </td>
           <td>${price}</td>
           <td>${marketCap}</td>

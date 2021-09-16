@@ -4,7 +4,10 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 // Import testing methods from the React Testing Library
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+import { MemoryRouter as Router, Route, Switch } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 
 import CoinsList from "./index";
 import testData from "./list.data.js";
@@ -16,6 +19,37 @@ const server = setupServer(
     return response(ctx.json(testData));
   })
 );
+
+function renderWithRoutes() {
+  render(
+    <Router initialEntries={["/coins"]}>
+      <Switch>
+        <Route exact path="/coins">
+          <ErrorBoundary
+            fallback={
+              <section role="alert">
+                <h2>Something went wrong:</h2>
+              </section>
+            }
+          >
+            <CoinsList />
+          </ErrorBoundary>
+        </Route>
+        <Route path="/coins/:id">
+          <ErrorBoundary
+            fallback={
+              <section role="alert">
+                <h2>Something went wrong:</h2>
+              </section>
+            }
+          >
+            <h2>Bitcoin view page</h2>
+          </ErrorBoundary>
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
 
 describe("CoinsList", () => {
   // Set up API mocking before all tests
@@ -30,7 +64,7 @@ describe("CoinsList", () => {
   // For each test, follow the arrange-act-assert pattern
   test("displays the correct heading", async () => {
     // Arrange
-    render(<CoinsList />); // The render method renders a React element into the DOM.
+    renderWithRoutes();
 
     // Act
     await waitFor(() => screen.getByRole("heading", { level: 2 })); // `waitFor` waits until the callback doesn't throw an error (i.e., until the h2 tag is rendered on the page).
@@ -42,7 +76,7 @@ describe("CoinsList", () => {
 
   test("displays the correct table columns", async () => {
     // Arrange
-    render(<CoinsList />);
+    renderWithRoutes();
 
     // Act
     await waitFor(() => screen.getAllByRole("columnheader"));
@@ -58,7 +92,7 @@ describe("CoinsList", () => {
 
   test("displays 20 results", async () => {
     // Arrange
-    render(<CoinsList />);
+    renderWithRoutes();
 
     // Act
     await waitFor(() => screen.getByText("Bitcoin"));
@@ -66,5 +100,66 @@ describe("CoinsList", () => {
     // Assert
     const coinsRows = screen.getAllByRole("row");
     expect(coinsRows).toHaveLength(21); // including the column header row
+  });
+
+  test("routes to coin view page on clicking a coin icon", async () => {
+    // Arrange
+    renderWithRoutes();
+
+    // Act
+    await waitFor(() => screen.getByText("Bitcoin"));
+    await fireEvent.click(screen.getByAltText("Bitcoin")); // simulate a click on the icon
+
+    // Assert
+    expect(screen.getByText(/Bitcoin view page/i)).toBeInTheDocument();
+  });
+
+  test("routes to coin view page on clicking a coin name", async () => {
+    // Arrange
+    renderWithRoutes();
+
+    // Act
+    await waitFor(() => screen.getByText("Bitcoin"));
+    await fireEvent.click(screen.getAllByRole("link")[0]); // simulate a click on the name
+
+    // Assert
+    expect(screen.getByText("Bitcoin view page")).toBeInTheDocument();
+  });
+
+  test("handles rendering error", async () => {
+    // Arrange
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {}); // mute the console errors
+    render(<CoinsList />); // rendering CoinsList without wrapping it in a Router component will throw a rendering error
+
+    // Act
+    await waitFor(() => screen.getByRole("alert"));
+
+    // Assert
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      /Something went wrong/i
+    );
+
+    spy.mockRestore(); // restore console.error() to its original implementation
+  });
+
+  test("handles server error", async () => {
+    // Arrange
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {}); // mute the console errors
+    server.use(
+      rest.get("http://localhost:3004/api/coins", (request, response, ctx) => {
+        return response(ctx.status(500));
+      })
+    );
+    renderWithRoutes();
+
+    // Act
+    await waitFor(() => screen.getByRole("alert"));
+
+    // Assert
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      /Something went wrong/i
+    );
+
+    spy.mockRestore(); // restore console.error() to its original implementation
   });
 });
