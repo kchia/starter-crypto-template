@@ -1,16 +1,6 @@
 {
   "favorites": [
     {
-      "originalAssetId": "112502130263256739190670043168439040628795262579647130438349292898030861680641",
-      "name": "Poop 3432",
-      "imageUrl": "https://lh3.googleusercontent.com/n3ZnKpS_kzSfA9CNHU2ZClKak2p8lJvwsEKKKyuHeawZFWPPfkHMmxo_VZi-HGbBHWG6Js_eErE1WnQHvxeouuXCTqYPMLzui8hV",
-      "type": "NFT",
-      "assetContractAddress": "0x495f947276749ce646f68ac8c248420045cb7b5e",
-      "notes": "asdfdfas",
-      "nickname": "crapsdfdsaf",
-      "id": 23
-    },
-    {
       "originalAssetId": "100564807401110094006224171062668011574609527632321157912933584750276239163393",
       "name": "5620",
       "imageUrl": "https://lh3.googleusercontent.com/CdPdUqmoa8uAbDSNE7CXTTMsjnXdJZj2nUM1eRRsPjh6uq2ljt605Gf6V_pz8EwTaT7tlvbh3QJo_C13lVfMrEuV-oxa26uQbl5f3Q",
@@ -19,6 +9,42 @@
       "notes": "adf",
       "nickname": "alien",
       "id": 27
+    },
+    {
+      "originalAssetId": "ethereum",
+      "name": "Ethereum",
+      "imageUrl": "https://static.coinstats.app/coins/EthereumOCjgD.png",
+      "type": "coin",
+      "notes": "asdf",
+      "nickname": "asdf",
+      "id": 28
+    },
+    {
+      "originalAssetId": "bitcoin",
+      "name": "Bitcoin",
+      "imageUrl": "https://static.coinstats.app/coins/Bitcoin6l39t.png",
+      "type": "coin",
+      "notes": "asdf",
+      "nickname": "saf",
+      "id": 29
+    },
+    {
+      "originalAssetId": "solana",
+      "name": "Solana",
+      "imageUrl": "https://static.coinstats.app/coins/solanambZ.png",
+      "type": "coin",
+      "notes": "asdf",
+      "nickname": "asdf",
+      "id": 30
+    },
+    {
+      "originalAssetId": "dogecoin",
+      "name": "Dogecoin",
+      "imageUrl": "https://static.coinstats.app/coins/DogecoinIZai5.png",
+      "type": "coin",
+      "notes": "coin",
+      "nickname": "doggy",
+      "id": 31
     }
   ]
 }

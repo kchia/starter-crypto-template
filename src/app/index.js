@@ -1,5 +1,4 @@
-function App() {
-  return <div>Hello World</div>;
+import Layout from "./layout";
+export default function App() {
+  return <Layout />;
 }
-
-export default App;
