@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
+import PropTypes from "prop-types";
 
 import { STATUS } from "../../../common/constants";
-import { ErrorFallback, Loader } from "../../../common/core";
+import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { logError } from "../../../common/utils";
 
 import { read } from "../coins.service.js";
 
 import styles from "./view.module.css";
 
-export default function CoinView() {
+export default function CoinView({ handleFavoriteChange }) {
   const [coin, setCoin] = useState({});
   const [status, setStatus] = useState(STATUS.idle);
   const { id } = useParams();
   const handleError = useErrorHandler();
+  const history = useHistory();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -78,6 +80,11 @@ export default function CoinView() {
     </ListGroupItem>
   ));
 
+  function handleSaveToFavoritesButtonClick() {
+    handleFavoriteChange(coin);
+    history.push(`/favorites/new`);
+  }
+
   const coinCard = (
     <Card className={styles.card}>
       <Card.Img
@@ -107,6 +114,10 @@ export default function CoinView() {
         {twitterUrl && <Card.Link href={twitterUrl}>Twitter</Card.Link>}
         <Card.Link href={websiteUrl}>Website</Card.Link>
       </Card.Body>
+      <Button
+        text="save to favorites"
+        handleClick={handleSaveToFavoritesButtonClick}
+      />
     </Card>
   );
 
@@ -127,3 +138,7 @@ export default function CoinView() {
 
   return <section className={styles.container}>{content}</section>;
 }
+
+CoinView.propTypes = {
+  handleFavoriteChange: PropTypes.func.isRequired,
+};

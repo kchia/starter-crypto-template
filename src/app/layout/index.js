@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -18,6 +19,24 @@ import Footer from "./footer";
 import RouteWithErrorBoundary from "./route-with-error-boundary";
 
 export default function Layout() {
+  const [favorite, setFavorite] = useState({});
+
+  function handleFavoriteChange({
+    originalAssetId,
+    name,
+    imageUrl,
+    type,
+    assetContractAddress,
+  }) {
+    setFavorite({
+      originalAssetId,
+      name,
+      imageUrl,
+      type,
+      assetContractAddress,
+    });
+  }
+
   return (
     <>
       <div className={headerContainer}>
@@ -34,7 +53,7 @@ export default function Layout() {
             <CoinsList />
           </RouteWithErrorBoundary>
           <RouteWithErrorBoundary path="/coins/:id">
-            <CoinView />
+            <CoinView handleFavoriteChange={handleFavoriteChange} />
           </RouteWithErrorBoundary>
 
           <RouteWithErrorBoundary exact path="/collectibles">
@@ -48,7 +67,7 @@ export default function Layout() {
             <FavoritesList />
           </RouteWithErrorBoundary>
           <RouteWithErrorBoundary path="/favorites/new">
-            <FavoriteCreate />
+            <FavoriteCreate favorite={favorite} />
           </RouteWithErrorBoundary>
           <RouteWithErrorBoundary path="/favorites/:id/edit">
             <FavoriteEdit />
