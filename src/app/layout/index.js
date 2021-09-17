@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   CoinsList,
@@ -18,23 +18,17 @@ import Header from "./header";
 import Footer from "./footer";
 import RouteWithErrorBoundary from "./route-with-error-boundary";
 
-export default function Layout() {
-  const [favorite, setFavorite] = useState({});
+import {
+  favoriteSelected,
+  selectFavorite,
+} from "../../features/favorites/favorite.slice";
 
-  function handleFavoriteChange({
-    originalAssetId,
-    name,
-    imageUrl,
-    type,
-    assetContractAddress,
-  }) {
-    setFavorite({
-      originalAssetId,
-      name,
-      imageUrl,
-      type,
-      assetContractAddress,
-    });
+export default function Layout() {
+  const favorite = useSelector(selectFavorite);
+  const dispatch = useDispatch();
+
+  function handleFavoriteChange(favorite) {
+    dispatch(favoriteSelected(favorite));
   }
 
   return (
