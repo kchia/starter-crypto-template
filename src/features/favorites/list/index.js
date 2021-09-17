@@ -2,44 +2,74 @@ import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 
-import { Button, ErrorFallback, Loader } from "../../../common/core";
+import {
+  Button,
+  Modal as DeleteModal,
+  ErrorFallback,
+  Loader,
+} from "../../../common/core";
 import { STATUS } from "../../../common/constants";
 import { logError } from "../../../common/utils";
 
-import { list } from "../favorites.service.js";
+import { list, remove } from "../favorites.service.js";
 
 import styles from "./list.module.css";
 export default function FavoritesList() {
   const [favorites, setFavorites] = useState([]);
   const [status, setStatus] = useState(STATUS.idle);
+  const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState({});
   const handleError = useErrorHandler();
   const history = useHistory();
 
   useEffect(() => {
     const abortController = new AbortController();
-    async function loadFavorites() {
-      if (status === STATUS.idle) {
-        try {
-          setStatus(STATUS.loading);
-          setFavorites(await list(abortController.signal));
-        } catch ({ message }) {
-          handleError(
-            new Error(
-              `Sorry, we're having trouble loading your favorites: ${message}`
-            )
-          );
-        } finally {
-          setStatus(STATUS.idle);
-        }
-      }
-    }
-    loadFavorites();
-
+    loadFavorites(abortController.signal);
     return () => abortController.abort();
   }, []);
 
+  async function loadFavorites(signal) {
+    if (status === STATUS.idle) {
+      try {
+        setStatus(STATUS.loading);
+        setFavorites(await list(signal));
+      } catch ({ message }) {
+        handleError(
+          new Error(
+            `Sorry, we're having trouble loading your favorites: ${message}`
+          )
+        );
+      } finally {
+        setStatus(STATUS.idle);
+      }
+    }
+  }
+
   function handleEditButtonClick(id) {
     history.push(`/favorites/${id}/edit`);
+  }
+
+  function handleDeleteButtonClick(id, name) {
+    setSelected({ id, name });
+    setShowModal(true);
+  }
+
+  async function reset() {
+    await loadFavorites();
+    setSelected({});
+    setShowModal(false);
+  }
+
+  async function handleConfirmDeleteButtonClick() {
+    try {
+      await remove({ id: selected.id });
+    } catch ({ message }) {
+      handleError(
+        new Error(`Sorry, the favorited asset cannot be deleted: ${message}`)
+      );
+    } finally {
+      reset();
+    }
   }
 
   const favoritesRows = favorites.map(
@@ -59,7 +89,7 @@ export default function FavoritesList() {
           : `/collectibles/${assetContractAddress}/${originalAssetId}`;
 
       return (
-        <tr className={styles.tableRow} key={originalAssetId}>
+        <tr className={styles.tableRow} key={id}>
           <td className={styles.tableCell}>{id}</td>
           <td className={styles.tableCell}>
             <Link to={urlPath}>
@@ -74,6 +104,10 @@ export default function FavoritesList() {
           <td className={styles.tableCell}>{notes}</td>
           <td className={styles.tableCellButtonContainer}>
             <Button text="edit" handleClick={() => handleEditButtonClick(id)} />
+            <Button
+              text="delete"
+              handleClick={() => handleDeleteButtonClick(id, name)}
+            />
           </td>
         </tr>
       );
@@ -116,6 +150,16 @@ export default function FavoritesList() {
     <section className={styles.container}>
       <h2>Favorites</h2>
       {content}
+      <DeleteModal
+        heading={`Are you sure you want to unfavorite ${selected.name}?`}
+        body="This action cannot be undone!"
+        handleClose={reset}
+        handleSecondaryButtonClick={reset}
+        handlePrimaryButtonClick={handleConfirmDeleteButtonClick}
+        secondaryText="Cancel"
+        primaryText="Delete"
+        show={showModal}
+      />
     </section>
   );
 }
