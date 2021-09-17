@@ -9,6 +9,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter as Router, Route, Switch } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { Provider } from "react-redux";
+
+import { store } from "../../../app/store";
 import CoinsList from "./index";
 import testData from "./list.data.js";
 
@@ -22,32 +25,34 @@ const server = setupServer(
 
 function renderWithRoutes() {
   render(
-    <Router initialEntries={["/coins"]}>
-      <Switch>
-        <Route exact path="/coins">
-          <ErrorBoundary
-            fallback={
-              <section role="alert">
-                <h2>Something went wrong:</h2>
-              </section>
-            }
-          >
-            <CoinsList />
-          </ErrorBoundary>
-        </Route>
-        <Route path="/coins/:id">
-          <ErrorBoundary
-            fallback={
-              <section role="alert">
-                <h2>Something went wrong:</h2>
-              </section>
-            }
-          >
-            <h2>Bitcoin view page</h2>
-          </ErrorBoundary>
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router initialEntries={["/coins"]}>
+        <Switch>
+          <Route exact path="/coins">
+            <ErrorBoundary
+              fallback={
+                <section role="alert">
+                  <h2>Something went wrong:</h2>
+                </section>
+              }
+            >
+              <CoinsList />
+            </ErrorBoundary>
+          </Route>
+          <Route path="/coins/:id">
+            <ErrorBoundary
+              fallback={
+                <section role="alert">
+                  <h2>Something went wrong:</h2>
+                </section>
+              }
+            >
+              <h2>Bitcoin view page</h2>
+            </ErrorBoundary>
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
@@ -129,7 +134,11 @@ describe("CoinsList", () => {
   test("handles rendering error", async () => {
     // Arrange
     const spy = jest.spyOn(console, "error").mockImplementation(() => {}); // mute the console errors
-    render(<CoinsList />); // rendering CoinsList without wrapping it in a Router component will throw a rendering error
+    render(
+      <Provider store={store}>
+        <CoinsList />
+      </Provider>
+    ); // rendering CoinsList without wrapping it in a Router component will throw a rendering error
 
     // Act
     await waitFor(() => screen.getByRole("alert"));
