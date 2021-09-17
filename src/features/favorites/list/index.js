@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 
-import { ErrorFallback, Loader } from "../../../common/core";
+import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { STATUS } from "../../../common/constants";
 import { logError } from "../../../common/utils";
 
@@ -13,6 +13,7 @@ export default function FavoritesList() {
   const [favorites, setFavorites] = useState([]);
   const [status, setStatus] = useState(STATUS.idle);
   const handleError = useErrorHandler();
+  const history = useHistory();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -36,6 +37,10 @@ export default function FavoritesList() {
 
     return () => abortController.abort();
   }, []);
+
+  function handleEditButtonClick(id) {
+    history.push(`/favorites/${id}/edit`);
+  }
 
   const favoritesRows = favorites.map(
     ({
@@ -67,6 +72,9 @@ export default function FavoritesList() {
           <td className={styles.tableCell}>{type}</td>
           <td className={styles.tableCell}>{nickname}</td>
           <td className={styles.tableCell}>{notes}</td>
+          <td className={styles.tableCellButtonContainer}>
+            <Button text="edit" handleClick={() => handleEditButtonClick(id)} />
+          </td>
         </tr>
       );
     }
