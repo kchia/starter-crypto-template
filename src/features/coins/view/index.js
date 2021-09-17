@@ -1,42 +1,44 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
 
 import { STATUS } from "../../../common/constants";
 import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { logError } from "../../../common/utils";
 
-import { read } from "../coins.service.js";
+import {
+  coinReset,
+  selectCoin,
+  fetchCoin,
+  selectFetchCoinStatus,
+} from "../coin.slice";
 
 import styles from "./view.module.css";
 
 export default function CoinView({ handleFavoriteChange }) {
-  const [coin, setCoin] = useState({});
-  const [status, setStatus] = useState(STATUS.idle);
+  const coin = useSelector(selectCoin);
+  const status = useSelector(selectFetchCoinStatus);
   const { id } = useParams();
   const handleError = useErrorHandler();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const abortController = new AbortController();
     async function loadCoin() {
-      if (status === STATUS.idle) {
-        try {
-          setStatus(STATUS.loading);
-          setCoin(await read({ id, signal: abortController.signal }));
-        } catch ({ message }) {
-          handleError(
-            new Error(
-              `Sorry, we're having trouble loading the coin: ${message}`
-            )
-          );
-        } finally {
-          setStatus(STATUS.idle);
-        }
+      try {
+        await dispatch(
+          fetchCoin({ id, signal: abortController.signal })
+        ).unwrap();
+      } catch ({ message }) {
+        handleError(
+          new Error(`Sorry, we're having trouble loading the coin: ${message}`)
+        );
       }
     }
     loadCoin();
@@ -128,10 +130,7 @@ export default function CoinView({ handleFavoriteChange }) {
       <ErrorBoundary
         children={coinCard}
         FallbackComponent={ErrorFallback}
-        onReset={() => {
-          setCoin({});
-          setStatus(STATUS.idle);
-        }}
+        onReset={() => dispatch(coinReset())}
         onError={logError}
       />
     );
