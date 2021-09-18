@@ -1,7 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { STATUS } from "../../common/constants";
+import { create } from "./favorites.service.js";
+
+const createNewFavorite = createAsyncThunk(
+  "favorites/favoriteCreated",
+  (data, { getState }) => {
+    const { createStatus } = getState().favorite;
+    if (createStatus !== STATUS.loading) return;
+    return create(data);
+  }
+);
 
 const initialState = {
   favorite: {},
+  createStatus: STATUS.idle,
+  error: null,
 };
 
 const favoriteSlice = createSlice({
@@ -25,10 +38,37 @@ const favoriteSlice = createSlice({
       },
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(createNewFavorite.pending, (state, action) => {
+        if (state.createStatus === STATUS.idle) {
+          state.createStatus = STATUS.loading;
+        }
+      })
+      .addCase(createNewFavorite.fulfilled, (state, { payload }) => {
+        if (state.createStatus === STATUS.loading) {
+          state.createStatus = STATUS.idle;
+        }
+      })
+      .addCase(createNewFavorite.rejected, (state, error) => {
+        if (state.createStatus === STATUS.loading) {
+          state.createStatus = STATUS.idle;
+          state.error = error;
+        }
+      });
+  },
 });
 
 const selectFavorite = ({ favorite: { favorite } }) => favorite;
+const selectCreateStatus = ({ favorite: { createStatus } }) => createStatus;
+
 const { reducer: favoriteReducer } = favoriteSlice;
 const { favoriteSelected } = favoriteSlice.actions;
 
-export { favoriteReducer, favoriteSelected, selectFavorite };
+export {
+  createNewFavorite,
+  favoriteReducer,
+  favoriteSelected,
+  selectCreateStatus,
+  selectFavorite,
+};

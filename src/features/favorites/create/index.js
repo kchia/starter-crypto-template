@@ -1,39 +1,34 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useErrorHandler } from "react-error-boundary";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Form, Loader } from "../../../common/core";
 import { STATUS } from "../../../common/constants";
 
-import { create } from "../favorites.service.js";
+import { createNewFavorite, selectCreateStatus } from "../favorite.slice";
 
 export default function FavoriteCreate({
   favorite: { name, imageUrl, ...favorite },
 }) {
-  const [status, setStatus] = useState(STATUS.idle);
+  const createStatus = useSelector(selectCreateStatus);
   const history = useHistory();
   const handleError = useErrorHandler();
+  const dispatch = useDispatch();
 
   async function handleFormSubmit(form) {
-    if (status === STATUS.idle) {
-      try {
-        setStatus(STATUS.loading);
-        await create({
+    try {
+      await dispatch(
+        createNewFavorite({
           name,
           imageUrl,
           ...favorite,
           ...form,
-        });
-
-        history.push("/favorites");
-      } catch ({ message }) {
-        handleError(
-          new Error(`Sorry, we're having trouble saving: ${message}`)
-        );
-      } finally {
-        setStatus(STATUS.idle);
-      }
+        })
+      ).unwrap();
+      history.push("/favorites");
+    } catch ({ message }) {
+      handleError(new Error(`Sorry, we're having trouble saving: ${message}`));
     }
   }
 
@@ -43,7 +38,7 @@ export default function FavoriteCreate({
     imageUrl,
   };
 
-  const renderLoader = status === STATUS.loading && <Loader />;
+  const renderLoader = createStatus === STATUS.loading && <Loader />;
 
   return (
     <section>
