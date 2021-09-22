@@ -1,11 +1,10 @@
 import { client } from "../../api/client";
 
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/collectibles`;
+
 async function list(signal) {
   try {
-    const { assets } = await client.get(
-      "https://api.opensea.io/api/v1/assets?limit=50",
-      { signal }
-    );
+    const assets = await client.get(API_URL, { signal });
     return assets.map(
       ({
         asset_contract: { address: assetContractAddress },
@@ -30,7 +29,7 @@ async function list(signal) {
   }
 }
 
-async function read(assetContractAddress, id, signal) {
+async function read(id, signal) {
   try {
     const {
       token_id: originalAssetId,
@@ -38,12 +37,9 @@ async function read(assetContractAddress, id, signal) {
       image_url: imageUrl,
       name,
       collection: { name: collectionName, description: collectionDescription },
-    } = await client.get(
-      `https://api.opensea.io/api/v1/asset/${assetContractAddress}/${id}/`,
-      { signal }
-    );
+    } = await client.get(`${API_URL}/${id}/`, { signal });
+
     return {
-      assetContractAddress,
       collectionName,
       collectionDescription,
       imageUrl,

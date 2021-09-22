@@ -1,12 +1,11 @@
 import { client } from "../../api/client";
 import { formatNumber } from "../../common/utils";
 
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/coins`;
+
 async function list(signal) {
   try {
-    const { coins } = await client.get(
-      "https://api.coinstats.app/public/v1/coins?skip=0&limit=20&currency=USD",
-      { signal }
-    );
+    const coins = await client.get(API_URL, { signal });
 
     return coins.map(
       ({
@@ -35,24 +34,19 @@ async function list(signal) {
 async function read({ id, signal }) {
   try {
     const {
-      coin: {
-        availableSupply,
-        icon: imageUrl,
-        id: originalAssetId,
-        marketCap,
-        name,
-        price,
-        priceChange1d,
-        rank,
-        symbol,
-        totalSupply,
-        twitterUrl,
-        websiteUrl,
-      },
-    } = await client.get(
-      `https://api.coinstats.app/public/v1/coins/${id}?currency=USD`,
-      { signal }
-    );
+      availableSupply,
+      icon: imageUrl,
+      id: originalAssetId,
+      marketCap,
+      name,
+      price,
+      priceChange1d,
+      rank,
+      symbol,
+      totalSupply,
+      twitterUrl,
+      websiteUrl,
+    } = await client.get(`${API_URL}/${id}`, { signal });
 
     return {
       availableSupply: formatNumber(availableSupply),
