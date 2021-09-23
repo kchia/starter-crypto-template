@@ -39,7 +39,7 @@ export default function Layout() {
           <Route exact path="/collectibles">
             <CollectiblesList />
           </Route>
-          <Route path="/collectibles/:address/:id">
+          <Route path="/collectibles/:id">
             <CollectibleView />
           </Route>
 

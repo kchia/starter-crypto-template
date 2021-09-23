@@ -7,6 +7,7 @@ async function list(signal) {
     const assets = await client.get(API_URL, { signal });
     return assets.map(
       ({
+        id,
         asset_contract: { address: assetContractAddress },
         collection: { name: collectionName },
         description,
@@ -15,6 +16,7 @@ async function list(signal) {
         name,
         permalink: url,
       }) => ({
+        id,
         assetContractAddress,
         collectionName,
         description,
@@ -29,7 +31,7 @@ async function list(signal) {
   }
 }
 
-async function read(id, signal) {
+async function read({ id, signal }) {
   try {
     const {
       token_id: originalAssetId,
