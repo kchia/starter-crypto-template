@@ -1,8 +1,4 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import { ErrorBoundary } from "react-error-boundary";
-
-import { ErrorFallback } from "../../common/core";
-import { logError } from "../../common/utils";
 
 import {
   CoinsList,
@@ -19,6 +15,7 @@ import { headerContainer, mainContainer } from "./layout.module.css";
 import Navigation from "./navigation";
 import Header from "./header";
 import Footer from "./footer";
+import RouteWithErrorBoundary from "./route-with-error-boundary";
 
 export default function Layout() {
   return (
@@ -33,43 +30,29 @@ export default function Layout() {
             <Redirect to="/coins" />
           </Route>
 
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route exact path="/coins">
-              <CoinsList />
-            </Route>
-          </ErrorBoundary>
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route path="/coins/:id">
-              <CoinView />
-            </Route>
-          </ErrorBoundary>
+          <RouteWithErrorBoundary exact path="/coins">
+            <CoinsList />
+          </RouteWithErrorBoundary>
+          <RouteWithErrorBoundary path="/coins/:id">
+            <CoinView />
+          </RouteWithErrorBoundary>
 
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route exact path="/collectibles">
-              <CollectiblesList />
-            </Route>
-          </ErrorBoundary>
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route path="/collectibles/:id">
-              <CollectibleView />
-            </Route>
-          </ErrorBoundary>
+          <RouteWithErrorBoundary exact path="/collectibles">
+            <CollectiblesList />
+          </RouteWithErrorBoundary>
+          <RouteWithErrorBoundary path="/collectibles/:id">
+            <CollectibleView />
+          </RouteWithErrorBoundary>
 
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route exact path="/favorites">
-              <FavoritesList />
-            </Route>
-          </ErrorBoundary>
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route path="/favorites/new">
-              <FavoriteCreate />
-            </Route>
-          </ErrorBoundary>
-          <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
-            <Route path="/favorites/:id/edit">
-              <FavoriteEdit />
-            </Route>
-          </ErrorBoundary>
+          <RouteWithErrorBoundary exact path="/favorites">
+            <FavoritesList />
+          </RouteWithErrorBoundary>
+          <RouteWithErrorBoundary path="/favorites/new">
+            <FavoriteCreate />
+          </RouteWithErrorBoundary>
+          <RouteWithErrorBoundary path="/favorites/:id/edit">
+            <FavoriteEdit />
+          </RouteWithErrorBoundary>
 
           <Route path="*">
             <NoMatch />
