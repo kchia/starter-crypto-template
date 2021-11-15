@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header>
       <Link className={styles.headerLink} to="/">
-        <h1>Crypto Project Template</h1>
+        <h1>MiamiStarter</h1>
       </Link>
     </header>
   );

@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "./navigation.module.css";
 export default function Navigation({
   navLinksData = [
-    { name: "home", path: "/" },
-    { name: "coins", path: "/coins" },
-    { name: "favorites", path: "/favorites" },
+    { name: "how it works", path: "/how-it-works" },
+    { name: "projects", path: "/projects" },
   ],
 }) {
   const navListItems = navLinksData.map(({ name, path }) => (
