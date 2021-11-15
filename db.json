@@ -65,7 +65,7 @@
       "id": 33
     }
   ],
-  "coins": [
+  "projects": [
     {
       "id": "bitcoin",
       "icon": "https://static.coinstats.app/coins/Bitcoin6l39t.png",
@@ -241,10 +241,7 @@
       "twitterUrl": "https://twitter.com/solana",
       "contractAddress": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4",
       "decimals": 18,
-      "exp": [
-        "https://explorer.solana.com/",
-        "https://solanabeach.io/"
-      ]
+      "exp": ["https://explorer.solana.com/", "https://solanabeach.io/"]
     },
     {
       "id": "usd-coin",
@@ -366,10 +363,7 @@
       "twitterUrl": "https://twitter.com/avalancheavax",
       "contractAddress": "0xd26649b3eb22eb275326a8cb052d2f4736c863cf",
       "decimals": 18,
-      "exp": [
-        "https://avascan.info/",
-        "https://explorer.avax.network/"
-      ]
+      "exp": ["https://avascan.info/", "https://explorer.avax.network/"]
     },
     {
       "id": "terra-luna",
@@ -516,9 +510,7 @@
       "priceChange1w": -19.49,
       "websiteUrl": "https://algorand.foundation/",
       "twitterUrl": "https://twitter.com/algorand",
-      "exp": [
-        "https://algoexplorer.io/"
-      ]
+      "exp": ["https://algoexplorer.io/"]
     },
     {
       "id": "cosmos",

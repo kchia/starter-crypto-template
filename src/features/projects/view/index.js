@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 
 import { STATUS } from "../../../common/constants";
@@ -12,36 +11,37 @@ import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { logError } from "../../../common/utils";
 
 import {
-  coinReset,
-  selectCoin,
-  fetchCoin,
-  selectFetchCoinStatus,
-} from "../coin.slice";
+  projectReset,
+  selectProject,
+  fetchProject,
+  selectFetchProjectStatus,
+} from "../project.slice";
 
 import styles from "./view.module.css";
 
-export default function CoinView({ handleFavoriteChange }) {
-  const coin = useSelector(selectCoin);
-  const status = useSelector(selectFetchCoinStatus);
+export default function ProjectView() {
+  const project = useSelector(selectProject);
+  const status = useSelector(selectFetchProjectStatus);
   const { id } = useParams();
   const handleError = useErrorHandler();
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const abortController = new AbortController();
-    async function loadCoin() {
+    async function loadProject() {
       try {
         await dispatch(
-          fetchCoin({ id, signal: abortController.signal })
+          fetchProject({ id, signal: abortController.signal })
         ).unwrap();
       } catch ({ message }) {
         handleError(
-          new Error(`Sorry, we're having trouble loading the coin: ${message}`)
+          new Error(
+            `Sorry, we're having trouble loading the project: ${message}`
+          )
         );
       }
     }
-    loadCoin();
+    loadProject();
 
     return () => abortController.abort();
   }, [id]);
@@ -58,7 +58,7 @@ export default function CoinView({ handleFavoriteChange }) {
     totalSupply,
     twitterUrl,
     websiteUrl,
-  } = coin;
+  } = project;
 
   const priceChange1dElement =
     priceChange1d < 0 ? (
@@ -82,12 +82,11 @@ export default function CoinView({ handleFavoriteChange }) {
     </ListGroupItem>
   ));
 
-  function handleSaveToFavoritesButtonClick() {
-    handleFavoriteChange(coin);
-    history.push(`/favorites/new`);
+  function handleVoteNowButtonClick() {
+    // open modal here
   }
 
-  const coinCard = (
+  const projectCard = (
     <Card className={styles.card}>
       <Card.Img
         alt={name}
@@ -116,10 +115,7 @@ export default function CoinView({ handleFavoriteChange }) {
         {twitterUrl && <Card.Link href={twitterUrl}>Twitter</Card.Link>}
         <Card.Link href={websiteUrl}>Website</Card.Link>
       </Card.Body>
-      <Button
-        text="save to favorites"
-        handleClick={handleSaveToFavoritesButtonClick}
-      />
+      <Button text="vote now" handleClick={handleVoteNowButtonClick} />
     </Card>
   );
 
@@ -128,16 +124,12 @@ export default function CoinView({ handleFavoriteChange }) {
       <Loader />
     ) : (
       <ErrorBoundary
-        children={coinCard}
+        children={projectCard}
         FallbackComponent={ErrorFallback}
-        onReset={() => dispatch(coinReset())}
+        onReset={() => dispatch(projectReset())}
         onError={logError}
       />
     );
 
   return <section className={styles.container}>{content}</section>;
 }
-
-CoinView.propTypes = {
-  handleFavoriteChange: PropTypes.func.isRequired,
-};

@@ -8,11 +8,11 @@ import { STATUS } from "../../../common/constants";
 import { logError } from "../../../common/utils";
 
 import {
-  coinsReset,
-  fetchCoins,
-  selectAllCoins,
-  selectFetchCoinsStatus,
-} from "../coins.slice";
+  projectsReset,
+  fetchProjects,
+  selectAllProjects,
+  selectFetchProjectsStatus,
+} from "../projects.slice";
 
 import {
   container,
@@ -25,29 +25,31 @@ import {
   positive,
 } from "./list.module.css";
 
-export default function CoinsList() {
-  const coins = useSelector(selectAllCoins);
-  const status = useSelector(selectFetchCoinsStatus);
+export default function ProjectsList() {
+  const projects = useSelector(selectAllProjects);
+  const status = useSelector(selectFetchProjectsStatus);
   const dispatch = useDispatch();
   const handleError = useErrorHandler();
 
   useEffect(() => {
     const abortController = new AbortController();
-    async function loadCoins() {
+    async function loadProjects() {
       try {
-        await dispatch(fetchCoins(abortController.signal)).unwrap();
+        await dispatch(fetchProjects(abortController.signal)).unwrap();
       } catch ({ message }) {
         handleError(
-          new Error(`Sorry, we're having trouble loading the coins: ${message}`)
+          new Error(
+            `Sorry, we're having trouble loading the projects: ${message}`
+          )
         );
       }
     }
-    loadCoins();
+    loadProjects();
 
     return () => abortController.abort();
   }, []);
 
-  const coinsRows = coins.map(
+  const projectsRows = projects.map(
     (
       {
         originalAssetId,
@@ -67,12 +69,12 @@ export default function CoinsList() {
         <tr className={tableRow} key={originalAssetId}>
           <td className={tableCell}>{rank}</td>
           <td className={tableCell}>
-            <Link to={`/coins/${originalAssetId}`}>
+            <Link to={`/projects/${originalAssetId}`}>
               <img className={image} src={imageUrl} alt={name} />
             </Link>
           </td>
           <td>
-            <Link to={`/coins/${originalAssetId}`}>
+            <Link to={`/projects/${originalAssetId}`}>
               <span>{name}</span>
             </Link>
           </td>
@@ -84,7 +86,7 @@ export default function CoinsList() {
     }
   );
 
-  const coinsTable = (
+  const projectsTable = (
     <table>
       <thead className={tableHeader}>
         <tr>
@@ -96,7 +98,7 @@ export default function CoinsList() {
           <th className={tableHeaderCell}>24H</th>
         </tr>
       </thead>
-      <tbody align="center">{coinsRows}</tbody>
+      <tbody align="center">{projectsRows}</tbody>
     </table>
   );
 
@@ -105,16 +107,16 @@ export default function CoinsList() {
       <Loader />
     ) : (
       <ErrorBoundary
-        children={coinsTable}
+        children={projectsTable}
         FallbackComponent={ErrorFallback}
-        onReset={() => dispatch(coinsReset())}
+        onReset={() => dispatch(projectsReset())}
         onError={logError}
       />
     );
 
   return (
     <section className={container}>
-      <h2>Top 20 Coins by Market Cap</h2>
+      <h2>Projects</h2>
       {content}
     </section>
   );

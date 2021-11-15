@@ -1,14 +1,8 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
-import {
-  CoinsList,
-  CoinView,
-  FavoritesList,
-  FavoriteCreate,
-  FavoriteEdit,
-  NoMatch,
-} from "../../features";
+import { ProjectsList, ProjectView, NoMatch } from "../../features";
+
+import { HomePage } from "../../pages";
 
 import { headerContainer, mainContainer } from "./layout.module.css";
 import Navigation from "./navigation";
@@ -16,19 +10,7 @@ import Header from "./header";
 import Footer from "./footer";
 import RouteWithErrorBoundary from "./route-with-error-boundary";
 
-import {
-  favoriteSelected,
-  selectFavorite,
-} from "../../features/favorites/favorite.slice";
-
 export default function Layout() {
-  const favorite = useSelector(selectFavorite);
-  const dispatch = useDispatch();
-
-  function handleFavoriteChange(favorite) {
-    dispatch(favoriteSelected(favorite));
-  }
-
   return (
     <>
       <div className={headerContainer}>
@@ -38,24 +20,18 @@ export default function Layout() {
       <main className={mainContainer}>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/coins" />
+            <Redirect to="/home" />
           </Route>
 
-          <RouteWithErrorBoundary exact path="/coins">
-            <CoinsList />
-          </RouteWithErrorBoundary>
-          <RouteWithErrorBoundary path="/coins/:id">
-            <CoinView handleFavoriteChange={handleFavoriteChange} />
+          <RouteWithErrorBoundary exact path="/home">
+            <HomePage />
           </RouteWithErrorBoundary>
 
-          <RouteWithErrorBoundary exact path="/favorites">
-            <FavoritesList />
+          <RouteWithErrorBoundary exact path="/projects">
+            <ProjectsList />
           </RouteWithErrorBoundary>
-          <RouteWithErrorBoundary path="/favorites/new">
-            <FavoriteCreate favorite={favorite} />
-          </RouteWithErrorBoundary>
-          <RouteWithErrorBoundary path="/favorites/:id/edit">
-            <FavoriteEdit />
+          <RouteWithErrorBoundary path="/projects/:id">
+            <ProjectView />
           </RouteWithErrorBoundary>
 
           <Route path="*">
