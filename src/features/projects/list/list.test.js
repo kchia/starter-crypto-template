@@ -56,7 +56,7 @@ function renderWithRoutes() {
   );
 }
 
-describe("ProjectsList", () => {
+xdescribe("ProjectsList", () => {
   // Set up API mocking before all tests
   beforeAll(() => server.listen());
 
