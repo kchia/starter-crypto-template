@@ -1,0 +1,21 @@
+.card {
+  color: var(--black-primary);
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.listGroupItem {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.listGroupItem span {
+  margin: 3px;
+}

@@ -4,10 +4,10 @@ import { list } from "./projects.service.js";
 
 const fetchProjects = createAsyncThunk(
   "projects/projectsFetched",
-  (signal, { getState }) => {
+  ({ signal, limit }, { getState }) => {
     const { status } = getState().projects;
     if (status !== STATUS.loading) return;
-    return list(signal);
+    return list({ signal, limit });
   }
 );
 

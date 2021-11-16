@@ -3,27 +3,35 @@ import { formatNumber } from "../../common/utils";
 
 const API_URL = "/api/projects";
 
-async function list(signal) {
+async function list({ signal, limit }) {
   try {
-    const projects = await client.get(API_URL, { signal });
+    const projects = await client.get(
+      limit ? `${API_URL}/?_limit=${limit}` : API_URL,
+      { signal }
+    );
 
     return projects.map(
       ({
-        id: originalAssetId,
-        icon: imageUrl,
-        name,
-        price,
-        priceChange1d,
-        marketCap,
-        rank,
+        images: [imageUrl],
+        logo,
+        title,
+        tagline,
+        description,
+        slug,
+        fundingRaised,
+        fundingGoal,
+        labels,
       }) => ({
-        originalAssetId,
         imageUrl,
-        name,
-        price: formatNumber(price),
-        priceChange1d,
-        marketCap: formatNumber(marketCap),
-        rank,
+        logo,
+        title,
+        tagline,
+        description,
+        slug,
+        fundingRaised: formatNumber(fundingRaised),
+        fundingGoal: formatNumber(fundingGoal),
+        fundingPercentage: Math.floor((fundingRaised / fundingGoal) * 100),
+        labels,
       })
     );
   } catch (error) {

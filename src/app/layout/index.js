@@ -1,7 +1,13 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { ProjectsList, ProjectView } from "../../features";
-import { HomePage, AboutPage, HowItWorksPage, NoMatchPage } from "../../pages";
+import { ProjectView } from "../../features";
+import {
+  HomePage,
+  AboutPage,
+  HowItWorksPage,
+  ProjectsPage,
+  NoMatchPage,
+} from "../../pages";
 
 import Header from "./header";
 import Footer from "./footer";
@@ -30,7 +36,7 @@ export default function Layout() {
           </RouteWithErrorBoundary>
 
           <RouteWithErrorBoundary exact path="/projects">
-            <ProjectsList />
+            <ProjectsPage />
           </RouteWithErrorBoundary>
           <RouteWithErrorBoundary path="/projects/:id">
             <ProjectView />

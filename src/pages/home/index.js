@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <section>
       <Hero />
-      {/* <ProjectsList /> */}
+      <ProjectsList title="Popular Projects Launching Soon..." limit={7} />
     </section>
   );
 }

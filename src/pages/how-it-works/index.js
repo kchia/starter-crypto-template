@@ -2,7 +2,7 @@ import styles from "./how-it-works.module.css";
 
 export default function HowItWorks() {
   return (
-    <article className={styles.container}>
+    <section className={styles.container}>
       <h2 className={styles.title}>How it works</h2>
       <ol>
         <li>
@@ -14,6 +14,6 @@ export default function HowItWorks() {
         <li>Login to MiamiStarter with your wallet.</li>
         <li>Vote on projects or invest directly in teams with $MIA.</li>
       </ol>
-    </article>
+    </section>
   );
 }

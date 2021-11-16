@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Col from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row";
 
 import { ErrorFallback, Loader } from "../../../common/core";
 import { STATUS } from "../../../common/constants";
 import { logError } from "../../../common/utils";
+
+import ProjectCard from "../card";
 
 import {
   projectsReset,
@@ -14,19 +17,9 @@ import {
   selectFetchProjectsStatus,
 } from "../projects.slice";
 
-import {
-  container,
-  tableHeader,
-  tableHeaderCell,
-  tableRow,
-  tableCell,
-  image,
-  negative,
-  positive,
-  title,
-} from "./list.module.css";
+import styles from "./list.module.css";
 
-export default function ProjectsList() {
+export default function ProjectsList({ title, limit }) {
   const projects = useSelector(selectAllProjects);
   const status = useSelector(selectFetchProjectsStatus);
   const dispatch = useDispatch();
@@ -36,7 +29,9 @@ export default function ProjectsList() {
     const abortController = new AbortController();
     async function loadProjects() {
       try {
-        await dispatch(fetchProjects(abortController.signal)).unwrap();
+        await dispatch(
+          fetchProjects({ signal: abortController.signal, limit })
+        ).unwrap();
       } catch ({ message }) {
         handleError(
           new Error(
@@ -48,59 +43,16 @@ export default function ProjectsList() {
     loadProjects();
 
     return () => abortController.abort();
-  }, []);
+  }, [dispatch, handleError]);
 
-  const projectsRows = projects.map(
-    (
-      {
-        originalAssetId,
-        imageUrl,
-        name,
-        price,
-        marketCap,
-        priceChange1d,
-        rank,
-      },
-      index
-    ) => {
-      const priceChangeElementClassName =
-        priceChange1d < 0 ? negative : positive;
-
-      return (
-        <tr className={tableRow} key={originalAssetId}>
-          <td className={tableCell}>{rank}</td>
-          <td className={tableCell}>
-            <Link to={`/projects/${originalAssetId}`}>
-              <img className={image} src={imageUrl} alt={name} />
-            </Link>
-          </td>
-          <td>
-            <Link to={`/projects/${originalAssetId}`}>
-              <span>{name}</span>
-            </Link>
-          </td>
-          <td>${price}</td>
-          <td>${marketCap}</td>
-          <td className={priceChangeElementClassName}>{priceChange1d}%</td>
-        </tr>
-      );
-    }
-  );
-
-  const projectsTable = (
-    <table>
-      <thead className={tableHeader}>
-        <tr>
-          <th className={tableHeaderCell}>#</th>
-          <th className={tableHeaderCell}>ICON</th>
-          <th className={tableHeaderCell}>NAME</th>
-          <th className={tableHeaderCell}>PRICE</th>
-          <th className={tableHeaderCell}>MCAP</th>
-          <th className={tableHeaderCell}>24H</th>
-        </tr>
-      </thead>
-      <tbody align="center">{projectsRows}</tbody>
-    </table>
+  const projectsList = (
+    <Row xs={1} md={3} lg={4} className={styles.row}>
+      {projects.map((project, index) => (
+        <Col key={`${project.title}-${index}`}>
+          <ProjectCard project={project} />
+        </Col>
+      ))}
+    </Row>
   );
 
   const content =
@@ -108,7 +60,7 @@ export default function ProjectsList() {
       <Loader />
     ) : (
       <ErrorBoundary
-        children={projectsTable}
+        children={projectsList}
         FallbackComponent={ErrorFallback}
         onReset={() => dispatch(projectsReset())}
         onError={logError}
@@ -116,8 +68,8 @@ export default function ProjectsList() {
     );
 
   return (
-    <section className={container}>
-      <h2 className={title}>Projects</h2>
+    <section className={styles.container}>
+      <h2 className={styles.title}>{title}</h2>
       {content}
     </section>
   );

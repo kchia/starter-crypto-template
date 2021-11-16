@@ -1,7 +1,7 @@
 import styles from "./about.module.css";
-export default function About() {
+export default function AboutPage() {
   return (
-    <article className={styles.container}>
+    <section className={styles.container}>
       <h2 className={styles.title}>About</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus
@@ -24,6 +24,6 @@ export default function About() {
         sed libero placerat dignissim. Curabitur quis nunc a sem iaculis
         pellentesque vitae sed nisi.
       </p>
-    </article>
+    </section>
   );
 }
