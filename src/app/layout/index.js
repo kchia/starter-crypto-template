@@ -4,7 +4,6 @@ import { ProjectsList, ProjectView } from "../../features";
 import { HomePage, NoMatchPage } from "../../pages";
 
 import { headerContainer, mainContainer } from "./layout.module.css";
-import Navigation from "./navigation";
 import Header from "./header";
 import Footer from "./footer";
 import RouteWithErrorBoundary from "./route-with-error-boundary";
@@ -12,10 +11,7 @@ import RouteWithErrorBoundary from "./route-with-error-boundary";
 export default function Layout() {
   return (
     <>
-      <div className={headerContainer}>
-        <Header />
-        <Navigation />
-      </div>
+      <Header />
       <main className={mainContainer}>
         <Switch>
           <Route exact path="/">
