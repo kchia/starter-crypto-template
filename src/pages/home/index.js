@@ -6,9 +6,8 @@ import About from "./about";
 export default function HomePage() {
   return (
     <section>
-      <h2>Home Page</h2>
       <Hero />
-      <ProjectsList />
+      {/* <ProjectsList /> */}
       <HowItWorks />
       <About />
     </section>

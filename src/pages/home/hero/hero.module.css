@@ -1,0 +1,11 @@
+.heroContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30px;
+}
+
+.heroContainer button {
+  margin: 10px 0px;
+  width: 100px;
+}
