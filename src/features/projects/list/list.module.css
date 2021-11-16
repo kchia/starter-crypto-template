@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.title {
+  padding: 20px;
+}
+
 .tableHeader {
   background-color: #333;
   color: #fff;

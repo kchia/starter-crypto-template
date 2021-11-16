@@ -23,6 +23,7 @@ import {
   image,
   negative,
   positive,
+  title,
 } from "./list.module.css";
 
 export default function ProjectsList() {
@@ -116,7 +117,7 @@ export default function ProjectsList() {
 
   return (
     <section className={container}>
-      <h2>Projects</h2>
+      <h2 className={title}>Projects</h2>
       {content}
     </section>
   );
