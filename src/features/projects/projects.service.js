@@ -3,7 +3,7 @@ import { formatNumber } from "../../common/utils";
 
 const API_URL = "/api/projects";
 
-async function list({ signal, limit }) {
+async function list({ limit, signal }) {
   try {
     const projects = await client.get(
       limit ? `${API_URL}/?_limit=${limit}` : API_URL,
@@ -12,6 +12,7 @@ async function list({ signal, limit }) {
 
     return projects.map(
       ({
+        id,
         images: [imageUrl],
         logo,
         title,
@@ -22,6 +23,7 @@ async function list({ signal, limit }) {
         fundingGoal,
         labels,
       }) => ({
+        id,
         imageUrl,
         logo,
         title,

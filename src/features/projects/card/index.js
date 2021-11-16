@@ -4,9 +4,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
+import { useHistory } from "react-router-dom";
+
 import styles from "./card.module.css";
 export default function ProjectCard({
   project: {
+    id,
     imageUrl,
     logo,
     title,
@@ -19,6 +22,12 @@ export default function ProjectCard({
     labels,
   },
 }) {
+  const history = useHistory();
+
+  function handleCardClick() {
+    history.push(`/projects/${id}`);
+  }
+
   const labelBadges = labels.map((label, index) => (
     <Badge bg="primary" key={`${label}-${index}`}>
       {label}
@@ -26,7 +35,7 @@ export default function ProjectCard({
   ));
 
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} onClick={handleCardClick}>
       <Card.Img
         alt={title}
         className={styles.img}

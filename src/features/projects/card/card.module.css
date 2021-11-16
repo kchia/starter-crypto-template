@@ -3,6 +3,13 @@
   padding: 10px;
   align-items: center;
   margin-bottom: 20px;
+  border-radius: 0px;
+}
+
+.card:hover {
+  bottom: 10px;
+  transition: top ease 1s;
+  cursor: pointer;
 }
 
 .img {
