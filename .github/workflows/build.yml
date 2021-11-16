@@ -27,7 +27,7 @@ jobs:
           yarn
       - name: yarn build
         run: |
-          CI=false yarn build --if-present
+          CI=false yarn build
       - name: yarn test
         run: |
-          yarn test --if-present
+          yarn test

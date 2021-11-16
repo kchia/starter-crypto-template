@@ -28,10 +28,10 @@ jobs:
           yarn install
       - name: yarn build
         run: |
-          CI=false yarn build --if-present
+          CI=false yarn build
       - name: yarn test
         run: |
-          yarn test --if-present
+          yarn test
       - name: Add remote origin
         run: |
           git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ env.HEROKU_APP_NAME }}.git
