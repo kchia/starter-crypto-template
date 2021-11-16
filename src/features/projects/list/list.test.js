@@ -12,12 +12,12 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Provider } from "react-redux";
 
 import { store } from "../../../app/store";
-import CoinsList from "./index";
+import ProjectsList from "./index";
 import testData from "./list.data.js";
 
 const server = setupServer(
-  // Intercept "GET http://localhost:3004/api/coins" requests
-  rest.get("http://localhost:3004/api/coins", (request, response, ctx) => {
+  // Intercept "GET http://localhost:3004/api/projects" requests
+  rest.get("http://localhost:3004/api/projects", (request, response, ctx) => {
     // Respond using a mocked JSON body
     return response(ctx.json(testData));
   })
@@ -26,9 +26,9 @@ const server = setupServer(
 function renderWithRoutes() {
   render(
     <Provider store={store}>
-      <Router initialEntries={["/coins"]}>
+      <Router initialEntries={["/projects"]}>
         <Switch>
-          <Route exact path="/coins">
+          <Route exact path="/projects">
             <ErrorBoundary
               fallback={
                 <section role="alert">
@@ -36,10 +36,10 @@ function renderWithRoutes() {
                 </section>
               }
             >
-              <CoinsList />
+              <ProjectsList />
             </ErrorBoundary>
           </Route>
-          <Route path="/coins/:id">
+          <Route path="/projects/:id">
             <ErrorBoundary
               fallback={
                 <section role="alert">
@@ -47,7 +47,7 @@ function renderWithRoutes() {
                 </section>
               }
             >
-              <h2>Bitcoin view page</h2>
+              <h2>Project view page</h2>
             </ErrorBoundary>
           </Route>
         </Switch>
@@ -56,7 +56,7 @@ function renderWithRoutes() {
   );
 }
 
-describe("CoinsList", () => {
+describe("ProjectsList", () => {
   // Set up API mocking before all tests
   beforeAll(() => server.listen());
 
@@ -76,7 +76,7 @@ describe("CoinsList", () => {
 
     // Assert
     const heading = screen.getByRole("heading", { level: 2 });
-    expect(heading).toHaveTextContent("Top 20 Coins by Market Cap"); // Assert that the heading is correct using `toHaveTextContent()`
+    expect(heading).toHaveTextContent("Projects"); // Assert that the heading is correct using `toHaveTextContent()`
   });
 
   test("displays the correct table columns", async () => {
@@ -100,35 +100,35 @@ describe("CoinsList", () => {
     renderWithRoutes();
 
     // Act
-    await waitFor(() => screen.getByText("Bitcoin"));
+    await waitFor(() => screen.getByText("project"));
 
     // Assert
-    const coinsRows = screen.getAllByRole("row");
-    expect(coinsRows).toHaveLength(21); // including the column header row
+    const projectsRows = screen.getAllByRole("row");
+    expect(projectsRows).toHaveLength(21); // including the column header row
   });
 
-  test("routes to coin view page on clicking a coin icon", async () => {
+  test("routes to project view page on clicking a project icon", async () => {
     // Arrange
     renderWithRoutes();
 
     // Act
-    await waitFor(() => screen.getByText("Bitcoin"));
-    await fireEvent.click(screen.getByAltText("Bitcoin")); // simulate a click on the icon
+    await waitFor(() => screen.getByText("project"));
+    await fireEvent.click(screen.getByAltText("project")); // simulate a click on the icon
 
     // Assert
-    expect(screen.getByText(/Bitcoin view page/i)).toBeInTheDocument();
+    expect(screen.getByText(/project view page/i)).toBeInTheDocument();
   });
 
-  test("routes to coin view page on clicking a coin name", async () => {
+  test("routes to project view page on clicking a project name", async () => {
     // Arrange
     renderWithRoutes();
 
     // Act
-    await waitFor(() => screen.getByText("Bitcoin"));
+    await waitFor(() => screen.getByText("project"));
     await fireEvent.click(screen.getAllByRole("link")[0]); // simulate a click on the name
 
     // Assert
-    expect(screen.getByText("Bitcoin view page")).toBeInTheDocument();
+    expect(screen.getByText("project view page")).toBeInTheDocument();
   });
 
   test("handles rendering error", async () => {
@@ -136,9 +136,9 @@ describe("CoinsList", () => {
     const spy = jest.spyOn(console, "error").mockImplementation(() => {}); // mute the console errors
     render(
       <Provider store={store}>
-        <CoinsList />
+        <ProjectsList />
       </Provider>
-    ); // rendering CoinsList without wrapping it in a Router component will throw a rendering error
+    ); // rendering projectsList without wrapping it in a Router component will throw a rendering error
 
     // Act
     await waitFor(() => screen.getByRole("alert"));
@@ -155,9 +155,12 @@ describe("CoinsList", () => {
     // Arrange
     const spy = jest.spyOn(console, "error").mockImplementation(() => {}); // mute the console errors
     server.use(
-      rest.get("http://localhost:3004/api/coins", (request, response, ctx) => {
-        return response(ctx.status(500));
-      })
+      rest.get(
+        "http://localhost:3004/api/projects",
+        (request, response, ctx) => {
+          return response(ctx.status(500));
+        }
+      )
     );
     renderWithRoutes();
 

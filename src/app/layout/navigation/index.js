@@ -4,7 +4,10 @@ import styles from "./navigation.module.css";
 export default function Navigation({
   navLinksData = [
     { name: "about", path: "/about" },
-    { name: "how it works", path: "/how-it-works" },
+    {
+      name: "how it works",
+      path: "how-it-works",
+    },
     { name: "projects", path: "/projects" },
   ],
 }) {

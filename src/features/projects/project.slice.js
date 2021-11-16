@@ -5,14 +5,14 @@ import { read } from "./projects.service.js";
 const fetchProject = createAsyncThunk(
   "project/projectFetched",
   (data, { getState }) => {
-    const { status } = getState().coin;
+    const { status } = getState().project;
     if (status !== STATUS.loading) return;
     return read(data);
   }
 );
 
 const initialState = {
-  coin: {},
+  project: {},
   status: STATUS.idle,
   error: null,
 };
@@ -35,7 +35,7 @@ const projectSlice = createSlice({
       .addCase(fetchProject.fulfilled, (state, { payload }) => {
         if (state.status === STATUS.loading) {
           state.status = STATUS.idle;
-          state.coin = payload;
+          state.project = payload;
         }
       })
       .addCase(fetchProject.rejected, (state, { error: { message } }) => {

@@ -1,8 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { ProjectsList, ProjectView, NoMatch } from "../../features";
-
-import { HomePage } from "../../pages";
+import { ProjectsList, ProjectView } from "../../features";
+import { HomePage, NoMatchPage } from "../../pages";
 
 import { headerContainer, mainContainer } from "./layout.module.css";
 import Navigation from "./navigation";
@@ -23,7 +22,7 @@ export default function Layout() {
             <Redirect to="/home" />
           </Route>
 
-          <RouteWithErrorBoundary exact path="/home">
+          <RouteWithErrorBoundary path="/home">
             <HomePage />
           </RouteWithErrorBoundary>
 
@@ -35,7 +34,7 @@ export default function Layout() {
           </RouteWithErrorBoundary>
 
           <Route path="*">
-            <NoMatch />
+            <NoMatchPage />
           </Route>
         </Switch>
       </main>
