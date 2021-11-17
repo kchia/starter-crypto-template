@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,11 +21,17 @@ import {
   selectFetchProjectStatus,
 } from "../project.slice";
 
+import { read as readFunds } from "../funds.service.js";
+
 import styles from "./view.module.css";
 
 export default function ProjectView() {
   const project = useSelector(selectProject);
   const status = useSelector(selectFetchProjectStatus);
+  const [funds, setFunds] = useState({
+    totalVotes: "",
+  });
+
   const { id } = useParams();
   const handleError = useErrorHandler();
   const dispatch = useDispatch();
@@ -37,6 +43,8 @@ export default function ProjectView() {
         await dispatch(
           fetchProject({ id, signal: abortController.signal })
         ).unwrap();
+
+        setFunds(await readFunds());
       } catch ({ message }) {
         handleError(
           new Error(
@@ -59,7 +67,6 @@ export default function ProjectView() {
     fundingGoal,
     fundingPercentage,
     fundingRaised,
-    votes,
     voteCount,
     perks,
     solutionDescription,
@@ -73,6 +80,8 @@ export default function ProjectView() {
     twitterUrl,
     whitepapers,
   } = project;
+
+  const { deadline = "", totalVotes } = funds;
 
   function handleVoteNowButtonClick() {
     // open modal here
@@ -207,24 +216,34 @@ export default function ProjectView() {
     </section>
   );
 
-  const voteCard = (
-    <Card>
-      <Card.Body>
-        <Card.Title>
-          {fundingRaised} of {fundingGoal} in $MIA raised
-        </Card.Title>
-        <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
-        <Card.Text>{voteCount} votes</Card.Text>
-        <Button text="vote now" handleClick={handleVoteNowButtonClick} />
-      </Card.Body>
-    </Card>
+  const votePercentage = Math.floor(
+    (parseInt(voteCount) / parseInt(totalVotes.split(",").join(""))) * 100
   );
 
-  const perksView = (
-    <section>
-      <h2>Select a perk</h2>
-      <h5>Mint an NFT</h5>
-    </section>
+  const actionCard = (
+    <Card className={styles.card}>
+      <Card.Body>
+        <Card.Title>VOTE</Card.Title>
+        <Card.Text>
+          {fundingRaised} of {fundingGoal} in $MIA raised
+        </Card.Text>
+        <Card.Text>
+          {voteCount}/{totalVotes} votes ({votePercentage}%)
+        </Card.Text>
+        <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
+        <Button text="vote now" handleClick={handleVoteNowButtonClick} />
+        <Card.Text>Deadline: {deadline.split("T")[0]}</Card.Text>
+      </Card.Body>
+      <Card.Body>
+        <Card.Title>INVEST (COMING SOON)</Card.Title>
+        <Button text="invest with $MIA" disabled />
+      </Card.Body>
+      <Card.Body>
+        <Card.Title>SELECT A PERK</Card.Title>
+        <Card.Text>Limited NFT</Card.Text>
+        <Button text="Mint" />
+      </Card.Body>
+    </Card>
   );
 
   const projectView = (
@@ -247,10 +266,7 @@ export default function ProjectView() {
           {teamView}
           {aboutView}
         </Col>
-        <Col md={4}>
-          {voteCard}
-          {perksView}
-        </Col>
+        <Col md={4}>{actionCard}</Col>
       </Row>
     </Container>
   );

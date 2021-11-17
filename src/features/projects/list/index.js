@@ -43,7 +43,7 @@ export default function ProjectsList({ title, limit }) {
     loadProjects();
 
     return () => abortController.abort();
-  }, [dispatch, handleError]);
+  }, [dispatch, limit, handleError]);
 
   const projectsList = (
     <Row xs={1} md={3} lg={4} className={styles.row}>
