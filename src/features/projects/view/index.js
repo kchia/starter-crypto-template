@@ -240,8 +240,21 @@ export default function ProjectView() {
       </Card.Body>
       <Card.Body>
         <Card.Title>SELECT A PERK</Card.Title>
-        <Card.Text>Limited NFT</Card.Text>
-        <Button text="Mint" />
+        <Card.Text>Mint Limited Edition NFTs</Card.Text>
+        <ul>
+          {perks.map(
+            ({ imageUrl, name, description, total, claimed }, index) => (
+              <li className={styles.listItem} key={`${name}-${index}`}>
+                <img className={styles.img} src={imageUrl} alt={name} />
+                <span>{name}</span>
+                <span>
+                  {claimed} of {total} claimed
+                </span>
+                <Button text="mint" />
+              </li>
+            )
+          )}
+        </ul>
       </Card.Body>
     </Card>
   );

@@ -6,7 +6,7 @@ export default function Navigation({
     { name: "about", path: "/about" },
     {
       name: "how it works",
-      path: "how-it-works",
+      path: "/how-it-works",
     },
     { name: "projects", path: "/projects" },
   ],

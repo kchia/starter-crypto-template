@@ -3,6 +3,7 @@
   border-radius: 0px;
   margin-left: 50px;
   position: fixed;
+  top: 30px;
 }
 
 .container {
@@ -16,11 +17,11 @@
   height: 100px;
 }
 
-.listGroupItem {
-  display: flex;
-  justify-content: space-between;
-}
-
 ul {
   list-style-type: none;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
 }
