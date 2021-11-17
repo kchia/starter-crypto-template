@@ -4,15 +4,38 @@ import { read } from "./projects.service.js";
 
 const fetchProject = createAsyncThunk(
   "project/projectFetched",
-  (data, { getState }) => {
+  ({ id, signal }, { getState }) => {
     const { status } = getState().project;
     if (status !== STATUS.loading) return;
-    return read(data);
+    return read({ id, signal });
   }
 );
 
 const initialState = {
-  project: {},
+  project: {
+    logo: "",
+    images: [],
+    title: "",
+    tagline: "",
+    description: "",
+    slug: "",
+    fundingGoal: 0,
+    fundingRaised: 0,
+    votes: [],
+    voteCount: 0,
+    perks: [],
+    labels: [],
+    solutionDescription: [],
+    problemDescription: [],
+    businessModelDescription: [],
+    businessModelCharts: [],
+    marketDescription: [],
+    marketReports: [],
+    team: [],
+    websiteUrl: "",
+    twitterUrl: "",
+    whitepapers: [],
+  },
   status: STATUS.idle,
   error: null,
 };

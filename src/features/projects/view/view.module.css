@@ -20,10 +20,6 @@
   justify-content: space-between;
 }
 
-.negative {
-  color: #ff0000;
-}
-
-.positive {
-  color: #00a300;
+ul {
+  list-style-type: none;
 }

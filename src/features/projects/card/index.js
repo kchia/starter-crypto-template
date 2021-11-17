@@ -46,15 +46,10 @@ export default function ProjectCard({
         <Card.Title className="text-center">{title}</Card.Title>
         <Card.Subtitle className="text-center">{tagline}</Card.Subtitle>
         <Card.Text>{description}</Card.Text>
-        <article>
-          <Card.Text>
-            {fundingRaised} of {fundingGoal} in $MIA raised
-          </Card.Text>
-          <ProgressBar
-            now={fundingPercentage}
-            label={`${fundingPercentage}%`}
-          />
-        </article>
+        <Card.Text>
+          {fundingRaised} of {fundingGoal} in $MIA raised
+        </Card.Text>
+        <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroupItem className={styles.listGroupItem}>
