@@ -14,9 +14,9 @@ export default function Hero() {
       minHeight="80vh"
       className={styles.heroContainer}
     >
-      <h2>Invest in the Miami you believe in</h2>
+      <h2>Invest in the Miami you believe in.</h2>
       <h3>Vote on highly vetted ideas and teams based in Miami.</h3>
-      <h3>Invest in Miami startups with $MIA.</h3>
+      <h3>Or invest with $MIA.</h3>
       <Button text="connect" handleClick={handleConnectButtonClick} />
     </LazyHero>
   );
