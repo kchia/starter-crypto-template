@@ -42,8 +42,10 @@ export default function HowItWorks() {
             MiamiStarter using your digital assets and identity.
           </li>
           <li>
-            Acquire MiamiCoin ($MIA) either by buying from okcoin.com or by
-            mining.
+            <a href="https://www.citycoins.co/miamicoin">
+              Acquire MiamiCoin ($MIA)
+            </a>{" "}
+            either by buying from okcoin.com or by mining.
           </li>
           <li>
             Login to MiamiStarter with your wallet, which must have some $MIA
