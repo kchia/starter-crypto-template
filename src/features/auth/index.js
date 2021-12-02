@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { STATUS } from "../../common/constants";
 import { Button, Loader } from "../../common/core";
 import useConnect, { userSession } from "../../common/hooks/useConnect";
-import useStx from "../../common/hooks/useStx";
 
 import styles from "./auth.module.css";
 
@@ -16,13 +15,13 @@ export default function Auth({
       stxAddress: { testnet: "" },
     },
   },
+  setCanVote,
 }) {
   const [userData, setUserData] = useState({ ...initialUserData });
   const [status, setStatus] = useState(STATUS.idle);
   const handleError = useErrorHandler();
   const history = useHistory();
   const { authenticate } = useConnect();
-  const { getAccountBalance } = useStx();
 
   useEffect(() => {
     if (userSession.isSignInPending()) {
@@ -34,16 +33,6 @@ export default function Auth({
       setUserData(userSession.loadUserData());
     }
   }, [status]);
-
-  useEffect(() => {
-    async function getAccountBalanceOnTestnet() {
-      const result = await getAccountBalance(
-        userData.profile.stxAddress.testnet
-      );
-      console.log(result);
-    }
-    getAccountBalanceOnTestnet();
-  }, [userData, getAccountBalance]);
 
   async function handleConnectButtonClick() {
     try {

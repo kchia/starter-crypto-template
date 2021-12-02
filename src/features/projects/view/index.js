@@ -14,6 +14,7 @@ import { STATUS } from "../../../common/constants";
 import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { logError } from "../../../common/utils";
 import { userSession } from "../../../common/hooks/useConnect";
+import useStx from "../../../common/hooks/useStx";
 
 import Auth from "../../auth";
 
@@ -34,6 +35,8 @@ export default function ProjectView() {
   const [funds, setFunds] = useState({
     totalVotes: "",
   });
+  const [canVote, setCanVote] = useState(false);
+  const { getAccountBalance, balanceHasCoin } = useStx();
 
   const { id } = useParams();
   const handleError = useErrorHandler();
@@ -60,6 +63,20 @@ export default function ProjectView() {
 
     return () => abortController.abort();
   }, [id, dispatch, handleError]);
+
+  useEffect(() => {
+    async function getAccountBalanceOnTestnet() {
+      try {
+        const userData = userSession.loadUserData();
+        const stxAddress = userData.profile.stxAddress.testnet;
+        const balances = await getAccountBalance(stxAddress);
+        setCanVote(balanceHasCoin("MIA", balances));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAccountBalanceOnTestnet();
+  }, [getAccountBalance, balanceHasCoin, setCanVote]);
 
   const {
     logo,
@@ -223,6 +240,18 @@ export default function ProjectView() {
     (parseInt(voteCount) / parseInt(totalVotes.split(",").join(""))) * 100
   );
 
+  const voteButton = canVote ? (
+    <Button text="vote now" handleClick={handleVoteNowButtonClick} />
+  ) : (
+    <>
+      <p>
+        You need to <a href="https://minemiamicoin.com/">hold some $MIA</a> to
+        cast a vote
+      </p>
+      <Button text="vote now" disabled />
+    </>
+  );
+
   const actionCard = userSession.isUserSignedIn() ? (
     <Card className={styles.card}>
       <Card.Body>
@@ -234,7 +263,7 @@ export default function ProjectView() {
           {voteCount}/{totalVotes} votes ({votePercentage}%)
         </Card.Text>
         <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
-        <Button text="vote now" handleClick={handleVoteNowButtonClick} />
+        {voteButton}
         <Card.Text>Deadline: {deadline.split("T")[0]}</Card.Text>
       </Card.Body>
       <Card.Body>
@@ -244,7 +273,7 @@ export default function ProjectView() {
       <Card.Body>
         <Card.Title>SELECT A PERK (COMING SOON!)</Card.Title>
         <Card.Text>
-          Mint limited edition NFTs when you invest above a threshold amount
+          Mint limited edition NFTs when you invest above a certain amount
         </Card.Text>
         <ul>
           {perks.map(
