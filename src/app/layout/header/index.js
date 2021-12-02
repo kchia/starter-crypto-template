@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../../common/core";
+import { Auth } from "../../../features";
 import styles from "./header.module.css";
 import Navigation from "../navigation";
 
 export default function Header() {
-  function handleConnectButtonClick() {}
   return (
     <header className={styles.headerContainer}>
       <div>
@@ -13,7 +12,7 @@ export default function Header() {
         </Link>
         <Navigation />
       </div>
-      <Button text="connect" handleClick={handleConnectButtonClick} />
+      <Auth />
     </header>
   );
 }

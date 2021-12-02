@@ -1722,6 +1722,26 @@
     buffer "^6.0.3"
     cross-fetch "^3.1.4"
 
+"@stacks/common@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@stacks/common/-/common-2.0.2.tgz#ac9822b0afabdc9c1ae4a0aea77f97d943d197c9"
+  integrity sha512-RpuNIqf+XmcHlMjXeVZE4fS3yIUlCvOYmxyBKOarh010Kx3Gs/LhAeejn/329lYcIE6VwNPoeXPSE9deq7Yjcw==
+  dependencies:
+    "@types/node" "^14.14.43"
+    bn.js "^4.12.0"
+    buffer "^6.0.3"
+    cross-fetch "^3.1.4"
+
+"@stacks/common@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stacks/common/-/common-3.0.0.tgz#e254ce29b8d62b002f713aa171004e9523eefbec"
+  integrity sha512-48zCfU8zX0r8b8eP2n6l/bicAiFQyHPTMimdBwot9JqgzWW8WqGpcZD3qSZIwV0tBHD5LMLxNY018OqQIH6c5Q==
+  dependencies:
+    "@types/node" "^14.14.43"
+    bn.js "^4.12.0"
+    buffer "^6.0.3"
+    cross-fetch "^3.1.4"
+
 "@stacks/connect-react@^13.0.0":
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/@stacks/connect-react/-/connect-react-13.0.0.tgz#1553fa640c83b5085ff205208c69e5ccbe6bf825"
@@ -1754,16 +1774,16 @@
     readable-stream "^3.6.0"
     url "^0.11.0"
 
-"@stacks/connect@^6.2.1":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@stacks/connect/-/connect-6.2.1.tgz#a185ca71fe453b7f432bce253dd68088ff498f9c"
-  integrity sha512-d3EYla/ADIeCJSXxIgr7kEnMJITGoAxeB8r2TLXpWin+VMVcW8b5QKJ+MwB+PiOoT371swyrzcsjGy+ZA/4oxw==
+"@stacks/connect@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@stacks/connect/-/connect-6.4.0.tgz#f9d5e83420a818dc59e46b61743b72ea08a301d0"
+  integrity sha512-cZTK6esZi71QkSM1IBcXK0OlR8xDWYm8QOOJYboemmj6MR5qnAXNeLfQth6da/RbiWy1BnXic2QVaymrQZFBwA==
   dependencies:
     "@stacks/auth" "2.0.1"
     "@stacks/connect-ui" "5.2.0"
-    "@stacks/network" "2.0.2"
+    "@stacks/network" "2.0.1"
     "@stacks/prettier-config" "0.0.8"
-    "@stacks/transactions" "2.0.1"
+    "@stacks/transactions" "2.1.0-beta.2"
     bn.js "^5.2.0"
     buffer "6.0.3"
     jsontokens "^3.0.0"
@@ -1793,19 +1813,26 @@
   dependencies:
     "@stacks/common" "^2.0.1"
 
-"@stacks/network@2.0.2", "@stacks/network@^2.0.1":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@stacks/network/-/network-2.0.2.tgz#a03dc34ff9fc7f8eaf7a2896d1412019c41b601f"
-  integrity sha512-DX6yFP8NgrxZ1bMwTbIoYzcCcjo979Mao1YsyClFr0Bv6JBF7+jh091A9hJ62jPLZDGbZA/PNWn6QGR+t3VY/w==
-  dependencies:
-    "@stacks/common" "^2.0.1"
-
 "@stacks/network@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@stacks/network/-/network-1.2.2.tgz#30ca87ad6339f32eb04ed3a9dbcc2e39ed933604"
   integrity sha512-xcWwuRrLJn9qqi3PEBcP2UPZHQztTZd31C0aVlzYHttNMir/sY9SrUqSnw45z2Jo4O9pIYYPIiPRtdV91Ho3fw==
   dependencies:
     "@stacks/common" "^1.2.2"
+
+"@stacks/network@^2.0.1":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@stacks/network/-/network-2.0.2.tgz#a03dc34ff9fc7f8eaf7a2896d1412019c41b601f"
+  integrity sha512-DX6yFP8NgrxZ1bMwTbIoYzcCcjo979Mao1YsyClFr0Bv6JBF7+jh091A9hJ62jPLZDGbZA/PNWn6QGR+t3VY/w==
+  dependencies:
+    "@stacks/common" "^2.0.1"
+
+"@stacks/network@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stacks/network/-/network-3.0.0.tgz#b4a7f3de8e4651d5426fc715a90f20b7123b166c"
+  integrity sha512-JJbQqCN8JlJz8bZu7enW9OBkMG5vEfHnp0rdY6AEp3Gzq9JsFD1C0BbbhMv/IqmCcLuAGmMwo+2C1NKCDJBUdQ==
+  dependencies:
+    "@stacks/common" "^3.0.0"
 
 "@stacks/prettier-config@0.0.8":
   version "0.0.8"
@@ -1826,6 +1853,18 @@
     schema-inspector "^2.0.1"
     zone-file "^1.0.0"
 
+"@stacks/profile@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stacks/profile/-/profile-3.0.0.tgz#714f9cf530130cb1fb598ddfd92616594c412bb5"
+  integrity sha512-Ig2OGf1oQbmrBj6GLmmPPX57jLdkolAQIi6319tWuyWYOi3mrUpSXS9e/yZt4cwSfajnv90JwxB6Y31zicsvcg==
+  dependencies:
+    "@stacks/common" "^3.0.0"
+    "@stacks/network" "^3.0.0"
+    "@stacks/transactions" "^3.0.0"
+    jsontokens "^3.0.0"
+    schema-inspector "^2.0.1"
+    zone-file "^2.0.0-beta.3"
+
 "@stacks/transactions@2.0.1", "@stacks/transactions@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@stacks/transactions/-/transactions-2.0.1.tgz#6a9270d49f2b93067f678fe45474a1d72247d4c1"
@@ -1840,6 +1879,50 @@
     "@types/sha.js" "^2.4.0"
     bn.js "^4.12.0"
     c32check "^1.1.2"
+    cross-fetch "^3.1.4"
+    elliptic "^6.5.4"
+    lodash "^4.17.20"
+    randombytes "^2.1.0"
+    ripemd160-min "^0.0.6"
+    sha.js "^2.4.11"
+    smart-buffer "^4.1.0"
+
+"@stacks/transactions@2.1.0-beta.2":
+  version "2.1.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@stacks/transactions/-/transactions-2.1.0-beta.2.tgz#d5a0ad36a2f40a244b4d06656d48e90757a8a513"
+  integrity sha512-IXYt/edMuDtmdhnfJT5cjColpetymEODTail/014k+KIeprmmHZW7PztokZCHVK/OV6k+J6gSZPCIc0iykNTKA==
+  dependencies:
+    "@stacks/common" "^2.0.2"
+    "@stacks/network" "^2.0.1"
+    "@types/bn.js" "^4.11.6"
+    "@types/elliptic" "^6.4.12"
+    "@types/node" "^14.14.43"
+    "@types/randombytes" "^2.0.0"
+    "@types/sha.js" "^2.4.0"
+    bn.js "^4.12.0"
+    c32check "^1.1.3"
+    cross-fetch "^3.1.4"
+    elliptic "^6.5.4"
+    lodash "^4.17.20"
+    randombytes "^2.1.0"
+    ripemd160-min "^0.0.6"
+    sha.js "^2.4.11"
+    smart-buffer "^4.1.0"
+
+"@stacks/transactions@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stacks/transactions/-/transactions-3.0.0.tgz#0c76f8832bc102e46fc165d5d6f29664640e639c"
+  integrity sha512-icweWBhiuYLOE/kkhBrsVrpydJEBE9dtDAxX6kBkZ2oAn9BTnW/Tozpxr6Zp0kJEx1ZTndINW7xtrJUsdHw7jg==
+  dependencies:
+    "@stacks/common" "^3.0.0"
+    "@stacks/network" "^3.0.0"
+    "@types/bn.js" "^4.11.6"
+    "@types/elliptic" "^6.4.12"
+    "@types/node" "^14.14.43"
+    "@types/randombytes" "^2.0.0"
+    "@types/sha.js" "^2.4.0"
+    bn.js "^4.12.0"
+    c32check "^1.1.3"
     cross-fetch "^3.1.4"
     elliptic "^6.5.4"
     lodash "^4.17.20"
@@ -3659,7 +3742,7 @@ bytes@3.1.0:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
-c32check@^1.1.2:
+c32check@^1.1.2, c32check@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/c32check/-/c32check-1.1.3.tgz#232890e4d788afbd4e97e2611a3c251aa63e5977"
   integrity sha512-ADADE/PjAbJRlwpG3ShaOMbBUlJJZO7xaYSRD5Tub6PixQlgR4s36y9cvMf/YRGpkqX+QOxIdMw216iC320q9A==
@@ -13334,3 +13417,8 @@ zone-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/zone-file/-/zone-file-1.0.0.tgz#93f4ae26d1a13974f8178f6dfff14b41466c6029"
   integrity sha512-dJynTf/5XCobE6diQBpNWQQRBzXE8d1QhHKemzrkffrZ36F9uKlbBVyIXXbG2CJoaTGZGh8zt2AHX/mG4txtqA==
+
+zone-file@^2.0.0-beta.3:
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/zone-file/-/zone-file-2.0.0-beta.3.tgz#fad3eb8c624ad8ae746b4547e9947804283048a1"
+  integrity sha512-6tE3PSRcpN5lbTTLlkLez40WkNPc9vw/u1J2j6DBiy0jcVX48nCkWrx2EC+bWHqC2SLp069Xw4AdnYn/qp/W5g==

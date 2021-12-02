@@ -2,8 +2,6 @@
   color: var(--black-primary);
   border-radius: 0px;
   margin-left: 50px;
-  position: fixed;
-  top: 30px;
 }
 
 .container {

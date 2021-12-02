@@ -34,7 +34,7 @@ export default function ProjectCard({
     </Badge>
   ));
 
-  return (
+  const content = (
     <Card className={styles.card} onClick={handleCardClick}>
       <Card.Img
         alt={title}
@@ -59,4 +59,6 @@ export default function ProjectCard({
       <Card.Footer>Launching Soon</Card.Footer>
     </Card>
   );
+
+  return content;
 }

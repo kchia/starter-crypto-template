@@ -1,10 +1,8 @@
 import LazyHero from "react-lazy-hero";
 
-import { Button } from "../../../common/core";
+import { Auth } from "../../../features";
 import styles from "./hero.module.css";
 export default function Hero() {
-  function handleConnectButtonClick() {}
-
   return (
     <LazyHero
       opacity={0.1}
@@ -17,7 +15,7 @@ export default function Hero() {
       <h2>Invest in the Miami you believe in.</h2>
       <h3>Vote on highly vetted ideas and teams based in Miami.</h3>
       <h3>Or invest with $MIA.</h3>
-      <Button text="connect" handleClick={handleConnectButtonClick} />
+      <Auth />
     </LazyHero>
   );
 }

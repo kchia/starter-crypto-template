@@ -13,6 +13,9 @@ import Row from "react-bootstrap/Row";
 import { STATUS } from "../../../common/constants";
 import { Button, ErrorFallback, Loader } from "../../../common/core";
 import { logError } from "../../../common/utils";
+import { userSession } from "../../../common/hooks/useConnect";
+
+import Auth from "../../auth";
 
 import {
   projectReset,
@@ -56,7 +59,7 @@ export default function ProjectView() {
     loadProject();
 
     return () => abortController.abort();
-  }, [id, dispatch, handleError]);
+  }, [id, dispatch, handleError, userSession]);
 
   const {
     logo,
@@ -220,7 +223,7 @@ export default function ProjectView() {
     (parseInt(voteCount) / parseInt(totalVotes.split(",").join(""))) * 100
   );
 
-  const actionCard = (
+  const actionCard = userSession.isUserSignedIn() ? (
     <Card className={styles.card}>
       <Card.Body>
         <Card.Title>VOTE</Card.Title>
@@ -257,6 +260,8 @@ export default function ProjectView() {
         </ul>
       </Card.Body>
     </Card>
+  ) : (
+    <Auth projectView />
   );
 
   const projectView = (
