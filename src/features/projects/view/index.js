@@ -59,7 +59,7 @@ export default function ProjectView() {
     loadProject();
 
     return () => abortController.abort();
-  }, [id, dispatch, handleError, userSession]);
+  }, [id, dispatch, handleError]);
 
   const {
     logo,
@@ -238,12 +238,14 @@ export default function ProjectView() {
         <Card.Text>Deadline: {deadline.split("T")[0]}</Card.Text>
       </Card.Body>
       <Card.Body>
-        <Card.Title>INVEST (COMING SOON)</Card.Title>
+        <Card.Title>INVEST (COMING SOON!)</Card.Title>
         <Button text="invest with $MIA" disabled />
       </Card.Body>
       <Card.Body>
-        <Card.Title>SELECT A PERK</Card.Title>
-        <Card.Text>Mint Limited Edition NFTs</Card.Text>
+        <Card.Title>SELECT A PERK (COMING SOON!)</Card.Title>
+        <Card.Text>
+          Mint limited edition NFTs when you invest above a threshold amount
+        </Card.Text>
         <ul>
           {perks.map(
             ({ imageUrl, name, description, total, claimed }, index) => (
@@ -253,7 +255,7 @@ export default function ProjectView() {
                 <span>
                   {claimed} of {total} claimed
                 </span>
-                <Button text="mint" />
+                <Button text="mint" disabled />
               </li>
             )
           )}

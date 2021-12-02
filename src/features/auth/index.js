@@ -5,15 +5,24 @@ import { useHistory } from "react-router-dom";
 import { STATUS } from "../../common/constants";
 import { Button, Loader } from "../../common/core";
 import useConnect, { userSession } from "../../common/hooks/useConnect";
+import useStx from "../../common/hooks/useStx";
 
 import styles from "./auth.module.css";
 
-export default function Auth({ projectView = false }) {
-  const [userData, setUserData] = useState({});
+export default function Auth({
+  projectView = false,
+  initialUserData = {
+    profile: {
+      stxAddress: { testnet: "" },
+    },
+  },
+}) {
+  const [userData, setUserData] = useState({ ...initialUserData });
   const [status, setStatus] = useState(STATUS.idle);
   const handleError = useErrorHandler();
   const history = useHistory();
   const { authenticate } = useConnect();
+  const { getAccountBalance } = useStx();
 
   useEffect(() => {
     if (userSession.isSignInPending()) {
@@ -26,11 +35,20 @@ export default function Auth({ projectView = false }) {
     }
   }, [status]);
 
+  useEffect(() => {
+    async function getAccountBalanceOnTestnet() {
+      const result = await getAccountBalance(
+        userData.profile.stxAddress.testnet
+      );
+      console.log(result);
+    }
+    getAccountBalanceOnTestnet();
+  }, [userData, getAccountBalance]);
+
   async function handleConnectButtonClick() {
     try {
       setStatus(STATUS.loading);
-      const userSession = await authenticate();
-      console.log(userSession);
+      await authenticate();
     } catch (error) {
       handleError(new Error(error.message));
     } finally {
