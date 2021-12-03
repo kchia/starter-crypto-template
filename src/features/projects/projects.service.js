@@ -13,7 +13,7 @@ async function list({ limit, signal }) {
     return projects.map(
       ({
         id,
-        images: [imageUrl],
+        images,
         logo,
         title,
         tagline,
@@ -22,19 +22,22 @@ async function list({ limit, signal }) {
         fundingRaised,
         fundingGoal,
         labels,
-      }) => ({
-        id,
-        imageUrl,
-        logo,
-        title,
-        tagline,
-        description,
-        slug,
-        fundingRaised: formatNumber(fundingRaised),
-        fundingGoal: formatNumber(fundingGoal),
-        fundingPercentage: Math.floor((fundingRaised / fundingGoal) * 100),
-        labels,
-      })
+      }) => {
+        const imageUrl = images[Math.floor(Math.random() * images.length)];
+        return {
+          id,
+          imageUrl,
+          logo,
+          title,
+          tagline,
+          description,
+          slug,
+          fundingRaised: formatNumber(fundingRaised),
+          fundingGoal: formatNumber(fundingGoal),
+          fundingPercentage: Math.floor((fundingRaised / fundingGoal) * 100),
+          labels,
+        };
+      }
     );
   } catch (error) {
     return Promise.reject(error);

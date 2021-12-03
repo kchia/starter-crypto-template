@@ -10,9 +10,10 @@
   padding: 80px;
 }
 
-.img {
+.projectViewLogo {
   width: 100px;
   height: 100px;
+  border-radius: 50%;
 }
 
 ul {
@@ -22,4 +23,46 @@ ul {
 .listItem {
   display: flex;
   flex-direction: column;
+}
+
+.logoContainer {
+  display: flex;
+  padding: 20px;
+}
+
+.logoSecondaryContainer {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.carouselContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.businessModelRowContainer {
+  margin-bottom: 20px;
+}
+
+.teamPersonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: fill;
+}
+
+.teamPersonName {
+  margin: 20px 0 0 0;
+}
+
+.teamJobTitle {
+  font-size: 0.75em;
 }

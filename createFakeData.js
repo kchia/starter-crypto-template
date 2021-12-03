@@ -4,9 +4,9 @@ const {
   date: { soon },
   finance: { bitcoinAddress },
   name: { firstName, lastName, jobTitle },
-  image: { avatar, food },
+  image: { food },
   internet: { url },
-  lorem: { paragraph, paragraphs, slug },
+  lorem: { paragraph, paragraphs },
 } = require("faker");
 const fs = require("fs");
 
@@ -82,11 +82,18 @@ function generateParagraphs() {
 
 function generateTeam(maximum = 5) {
   const team = [];
+  const avatars = [
+    "http://placeimg.com/640/480/people",
+    "http://placeimg.com/640/480/person",
+    "http://placeimg.com/640/480/man",
+    "http://placeimg.com/640/480/woman",
+    "http://placeimg.com/640/480/human",
+  ];
   const count = Math.ceil(Math.random() * maximum);
 
   for (let i = 0; i < count; i++) {
     team.push({
-      imageUrl: avatar(),
+      imageUrl: avatars[Math.floor(Math.random() * count)],
       firstName: firstName(),
       lastName: lastName(),
       title: jobTitle(),
@@ -109,21 +116,38 @@ function generateData(count = 25) {
   const projects = [];
 
   for (let id = 1; id < count; id++) {
+    const title = companyName();
+    const slug = title.replace(/,/g, "").split(" ").join("-").toLowerCase();
     projects.push({
       id,
       logo: "https://source.unsplash.com/200x200/?icon",
       images: [
         "https://source.unsplash.com/800x600/?miami",
-        "https://source.unsplash.com/800x600/?miami",
-        "https://source.unsplash.com/800x600/?miami",
         "https://source.unsplash.com/800x600/?startup",
-        "https://source.unsplash.com/800x600/?startup",
-        "https://source.unsplash.com/800x600/?startup",
+        "https://source.unsplash.com/800x600/?technology",
+        "https://source.unsplash.com/800x600/?programming",
+        "https://source.unsplash.com/800x600/?crypto",
+        "https://source.unsplash.com/800x600/?transportation",
+        "https://source.unsplash.com/800x600/?iphone",
+        "https://source.unsplash.com/800x600/?computer",
+        "https://source.unsplash.com/800x600/?bicycle",
+        "https://source.unsplash.com/800x600/?vacuum",
+        "https://source.unsplash.com/800x600/?car",
+        "https://source.unsplash.com/800x600/?camera",
+        "https://source.unsplash.com/800x600/?drone",
+        "https://source.unsplash.com/800x600/?ethereum",
+        "https://source.unsplash.com/800x600/?gaming",
+        "https://source.unsplash.com/800x600/?kitchen",
+        "https://source.unsplash.com/800x600/?scooter",
+        "https://source.unsplash.com/800x600/?innovation",
+        "https://source.unsplash.com/800x600/?sunglasses",
+        "https://source.unsplash.com/800x600/?headset",
+        "https://source.unsplash.com/800x600/?3d",
       ],
-      title: companyName(),
+      title,
       tagline: `${catchPhrase()} and ${bs()}`,
       description: paragraph(),
-      slug: slug(),
+      slug,
       fundingGoal: generateFundingGoal(),
       votes: generateCollection(bitcoinAddress, 1000),
       perks: generatePerks(),
@@ -133,8 +157,8 @@ function generateData(count = 25) {
       businessModelDescription: generateParagraphs(),
       businessModelCharts: [
         "https://source.unsplash.com/800x600/?charts",
-        "https://source.unsplash.com/800x600/?charts",
-        "https://source.unsplash.com/800x600/?charts",
+        "https://source.unsplash.com/800x600/?analysis",
+        "https://source.unsplash.com/800x600/?computation",
       ],
       marketDescription: generateParagraphs(),
       marketReports: generateCollection(url, 5),

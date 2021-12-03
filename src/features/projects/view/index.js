@@ -123,11 +123,11 @@ export default function ProjectView() {
     setShowVoteModal(false);
   }
   const productCarousel = (
-    <Carousel>
+    <Carousel className={styles.carouselContainer}>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://source.unsplash.com/400x200/?startup"
+          src="https://source.unsplash.com/800x600/?startup"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -138,10 +138,9 @@ export default function ProjectView() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://source.unsplash.com/400x200/?miami"
+          src="https://source.unsplash.com/800x600/?miami"
           alt="Second slide"
         />
-
         <Carousel.Caption>
           <h3>consectetur adipiscing</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -150,10 +149,9 @@ export default function ProjectView() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://source.unsplash.com/400x200/?technology"
+          src="https://source.unsplash.com/800x600/?technology"
           alt="Third slide"
         />
-
         <Carousel.Caption>
           <h3>vel scelerisque nisl</h3>
           <p>
@@ -186,7 +184,7 @@ export default function ProjectView() {
   const businessModelView = (
     <section>
       <h2>Business Model</h2>
-      <Row md={3}>
+      <Row md={3} className={styles.businessModelRowContainer}>
         {businessModelCharts.map((chart, index) => (
           <img key={`${chart}-${index}`} src={chart} alt={chart} />
         ))}
@@ -218,12 +216,19 @@ export default function ProjectView() {
       <ul>
         <Row md={3}>
           {team.map(({ firstName, lastName, imageUrl, title }, index) => (
-            <li key={`${firstName}-${index}`}>
-              <img src={imageUrl} alt={`${firstName} ${lastName}`} />
-              <p>
+            <li
+              className={styles.teamPersonContainer}
+              key={`${firstName}-${index}`}
+            >
+              <img
+                className={styles.teamImg}
+                src={imageUrl}
+                alt={`${firstName} ${lastName}`}
+              />
+              <p className={styles.teamPersonName}>
                 {firstName} {lastName}
               </p>
-              <p>{title}</p>
+              <p className={styles.teamJobTitle}>{title}</p>
             </li>
           ))}
         </Row>
@@ -240,7 +245,7 @@ export default function ProjectView() {
       <div>
         <a href={twitterUrl}>twitter</a>
       </div>
-      <h5>Whitepapers</h5>
+      <h3>Whitepapers</h3>
       <ul>
         {whitepapers.map((whitepaper, index) => (
           <li key={`${whitepaper}-${index}`}>
@@ -319,9 +324,13 @@ export default function ProjectView() {
             <Breadcrumb.Item href="/projects">projects</Breadcrumb.Item>
             <Breadcrumb.Item href={`/projects/${id}`}>{slug}</Breadcrumb.Item>
           </Breadcrumb>
-          <h1>{title}</h1>
-          <img src={logo} alt={title} />
-          <h3>{tagline}</h3>
+          <div className={styles.logoContainer}>
+            <img className={styles.projectViewLogo} src={logo} alt={title} />
+            <div className={styles.logoSecondaryContainer}>
+              <h2>{title}</h2>
+              <p>{tagline}</p>
+            </div>
+          </div>
           <p>{description}</p>
           {productView}
           {problemView}

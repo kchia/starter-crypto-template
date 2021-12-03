@@ -74,10 +74,12 @@ export default function Auth({
   }
 
   const content = projectView ? (
-    <Button
-      text="connect to web3 to vote on and/or invest in projects"
-      handleClick={handleConnectButtonClick}
-    />
+    <>
+      <Button text="connect to web3" handleClick={handleConnectButtonClick} />
+      <p className={styles.connectText}>
+        You must first connect your wallet to vote on and/or invest in projects
+      </p>
+    </>
   ) : status === STATUS.loading ? (
     <Loader />
   ) : status === STATUS.idle && !userSession.isUserSignedIn() ? (

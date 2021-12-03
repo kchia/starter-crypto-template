@@ -29,9 +29,7 @@ export default function ProjectCard({
   }
 
   const labelBadges = labels.map((label, index) => (
-    <Badge bg="primary" key={`${label}-${index}`}>
-      {label}
-    </Badge>
+    <Badge key={`${label}-${index}`}>{label}</Badge>
   ));
 
   const content = (
@@ -47,7 +45,8 @@ export default function ProjectCard({
         <Card.Subtitle>{tagline}</Card.Subtitle>
         <Card.Text>{description}</Card.Text>
         <Card.Text>
-          {fundingRaised} of {fundingGoal} in $MIA raised
+          <span className="span">{fundingRaised}</span> of {fundingGoal} in $MIA
+          raised
         </Card.Text>
         <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
       </Card.Body>
