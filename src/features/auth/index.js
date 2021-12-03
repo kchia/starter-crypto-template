@@ -6,6 +6,7 @@ import { STATUS } from "../../common/constants";
 import { Button, Loader } from "../../common/core";
 import { shortenAddress } from "../../common/utils";
 import useConnect, { userSession } from "../../common/hooks/useConnect";
+import useStx from "../../common/hooks/useStx";
 
 import styles from "./auth.module.css";
 
@@ -20,9 +21,11 @@ export default function Auth({
 }) {
   const [userData, setUserData] = useState({ ...initialUserData });
   const [status, setStatus] = useState(STATUS.idle);
+  const [balance, setBalance] = useState(0);
   const handleError = useErrorHandler();
   const history = useHistory();
   const { authenticate } = useConnect();
+  const { getAccountBalance } = useStx();
 
   useEffect(() => {
     if (userSession.isSignInPending()) {
@@ -34,6 +37,20 @@ export default function Auth({
       setUserData(userSession.loadUserData());
     }
   }, [status]);
+
+  useEffect(() => {
+    async function getAccountBalanceOnTestnet() {
+      try {
+        const userData = userSession.loadUserData();
+        const stxAddress = userData.profile.stxAddress.testnet;
+        const balances = await getAccountBalance(stxAddress);
+        setBalance(balances.stx.balance / 1000000);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAccountBalanceOnTestnet();
+  }, [getAccountBalance]);
 
   async function handleConnectButtonClick() {
     try {
@@ -55,8 +72,6 @@ export default function Auth({
       handleError(new Error("Sorry, we're having trouble logging out."));
     }
   }
-
-  const balance = 0;
 
   const content = projectView ? (
     <Button
