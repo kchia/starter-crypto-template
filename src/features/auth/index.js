@@ -18,6 +18,7 @@ export default function Auth({
     },
   },
   setCanVote,
+  displayWalletInfo = true,
 }) {
   const [userData, setUserData] = useState({ ...initialUserData });
   const [status, setStatus] = useState(STATUS.idle);
@@ -86,8 +87,12 @@ export default function Auth({
     <Button text="connect to web3" handleClick={handleConnectButtonClick} />
   ) : (
     <>
-      <p>Connected:{shortenAddress(userData.profile.stxAddress.testnet)}</p>
-      <p>STX balance: {balance}</p>
+      {displayWalletInfo && (
+        <>
+          <p>Connected:{shortenAddress(userData.profile.stxAddress.testnet)}</p>
+          <p>STX balance: {balance}</p>
+        </>
+      )}
       <Button text="log out" handleClick={handleLogoutButtonClick} />
     </>
   );

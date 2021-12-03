@@ -261,45 +261,57 @@ export default function ProjectView() {
   );
 
   const voteButton = canVote ? (
-    <Button text="vote now" handleClick={handleVoteNowButtonClick} />
+    <div className={styles.voteButtonContainer}>
+      <Button text="vote now" handleClick={handleVoteNowButtonClick} />
+    </div>
   ) : (
-    <>
+    <div className={styles.voteNowContainer}>
       <p>
-        You need to <a href="https://minemiamicoin.com/">hold some $MIA</a> to
-        cast a vote
+        You need to <a href="https://minemiamicoin.com/">hold some $MIA</a> in
+        your wallet to cast a vote
       </p>
       <Button text="vote now" disabled />
-    </>
+    </div>
   );
 
   const actionCard = userSession.isUserSignedIn() ? (
-    <Card className={styles.card}>
+    <Card className={`${styles.card} sticky-top`}>
       <Card.Body>
-        <Card.Title>VOTE</Card.Title>
+        <Card.Title>
+          <h3 className="text-center">vote</h3>
+        </Card.Title>
         <Card.Text>
-          {fundingRaised} of {fundingGoal} in $MIA raised
+          <span className="funding-raised">{fundingRaised}</span> of{" "}
+          {fundingGoal} in $MIA raised
         </Card.Text>
         <Card.Text>
-          {voteCount}/{totalVotes} votes ({votePercentage}%)
+          {voteCount}/{totalVotes} votes{" "}
+          <span className="funding-raised">({votePercentage}%)</span>
         </Card.Text>
         <ProgressBar now={fundingPercentage} label={`${fundingPercentage}%`} />
         {voteButton}
-        <Card.Text>Deadline: {deadline.split("T")[0]}</Card.Text>
+        <Card.Text className="text-center h6">
+          Deadline: {deadline.split("T")[0]}
+        </Card.Text>
       </Card.Body>
-      <Card.Body>
-        <Card.Title>INVEST (COMING SOON!)</Card.Title>
+      <Card.Body className="text-center">
+        <Card.Title>
+          <h3 className="text-center">invest (coming soon!)</h3>
+        </Card.Title>
         <Button text="invest with $mia" disabled />
       </Card.Body>
-      <Card.Body>
-        <Card.Title>SELECT A PERK (COMING SOON!)</Card.Title>
-        <Card.Text>
+      <Card.Body className="text-center">
+        <Card.Title>
+          <h3 className="text-center">mint a perk (coming soon!)</h3>
+        </Card.Title>
+        <Card.Text className="h5">
           Mint limited edition NFTs when you invest above a certain amount
         </Card.Text>
         <ul>
           {perks.map(
             ({ imageUrl, name, description, total, claimed }, index) => (
-              <li className={styles.listItem} key={`${name}-${index}`}>
-                <img className={styles.img} src={imageUrl} alt={name} />
+              <li className={`${styles.listItem} h6`} key={`${name}-${index}`}>
+                <img className={styles.perkImg} src={imageUrl} alt={name} />
                 <span>{name}</span>
                 <span>
                   {claimed} of {total} claimed

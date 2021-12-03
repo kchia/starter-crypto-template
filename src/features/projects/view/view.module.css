@@ -2,6 +2,7 @@
   color: var(--black-primary);
   border-radius: 0px;
   margin-left: 50px;
+  /* border: 2px solid var(--dark-pink); */
 }
 
 .container {
@@ -23,6 +24,16 @@ ul {
 .listItem {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
+  border: 2px solid var(--dark-turquoise);
+}
+
+.listItem button {
+  margin-top: 20px;
+}
+
+.listItem:hover {
+  cursor: pointer;
 }
 
 .logoContainer {
@@ -65,4 +76,34 @@ ul {
 
 .teamJobTitle {
   font-size: 0.75em;
+}
+
+.perkImg {
+  margin-bottom: 20px;
+}
+
+.voteNowContainer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--light-pink);
+  margin: 20px 0px;
+  border: 2px solid var(--dark-pink);
+}
+
+.voteButtonContainer {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.voteNowContainer a {
+  color: var(--white-primary);
+}
+
+.voteNowContainer a:hover {
+  color: yellow;
+}
+
+.card ul {
+  padding: 0;
 }

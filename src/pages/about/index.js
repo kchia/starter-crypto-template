@@ -21,14 +21,9 @@ export default function AboutPage() {
       </p>
 
       <p>
-        MiamiCoin’s contributions to the city's treasury have grown to tens of
-        millions of dollars in just a few months
-      </p>
-
-      <p>
-        Mayor Suarez and the City of Miami Commission have proposed several uses
-        for the funds, including crypto education and incentives for tech
-        entrepreneurs.
+        MiamiCoin’s contributions to Miami's treasury have grown to tens of
+        millions of dollars, and some of these funds could be used to
+        incentivize tech entrepreneurs.
       </p>
 
       <h3>Enter MiamiStarter...</h3>
@@ -50,21 +45,20 @@ export default function AboutPage() {
 
       <h3>About CityCoins</h3>
       <p>
+        $MIA is built on top of CityCoins, and it can be mined, held, stacked to
+        earn Stacks(STX), borrowed, lent, and programmed.
+      </p>
+      <p>
         The CityCoins protocol empowers urban communities worldwide to play an
         active role in how their cities are run, and offers a way for people to
         support their favorite cities.
       </p>
       <p>
         CityCoins are decentralized, programmable, and built on open-source
-        software,. They can be applied to a wide range of novel use cases, such
+        software. They can be applied to a wide range of novel use cases, such
         as apps for access control to digital or physical spaces, trading,
         lending, smart contract execution, and more.
       </p>
-      <p>
-        MiamiCoin ($MIA) is built on top of CityCoins, and it can be mined,
-        held, stacked to earn Stacks(STX), borrowed, lent, and programmed.
-      </p>
-
       <p>
         Read more about <Link to="/how-it-works">how MiamiStarter works.</Link>
       </p>

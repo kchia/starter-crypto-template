@@ -4,7 +4,16 @@ const {
   date: { soon },
   finance: { bitcoinAddress },
   name: { firstName, lastName, jobTitle },
-  image: { food },
+  image: {
+    food,
+    animals,
+    business,
+    city,
+    nightlife,
+    technics,
+    transport,
+    cats,
+  },
   internet: { url },
   lorem: { paragraph, paragraphs },
 } = require("faker");
@@ -61,11 +70,21 @@ function generateLabels(maximum = 5) {
 
 function generatePerks(maximum = 3) {
   const perks = [];
+  const images = [
+    food,
+    animals,
+    business,
+    city,
+    nightlife,
+    technics,
+    transport,
+    cats,
+  ];
   const count = Math.ceil(Math.random() * maximum);
 
   for (let i = 0; i < count; i++) {
     perks.push({
-      imageUrl: food(),
+      imageUrl: images[Math.floor(Math.random() * images.length)](),
       name: productName(),
       description: productDescription(),
       total: count,
