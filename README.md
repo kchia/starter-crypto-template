@@ -2,6 +2,12 @@
 
 Miamistarter is a Web 3.0 app that allows $MIA token holders to vote on and/or invest in innovative crypto and tech startups based in Miami.
 
+![MiamiStarter Home](images/miamistarter-home.png)
+
+![MiamiStarter Projects Launching Soon](images/miamistarter-projects-launching-soon.png)
+
+![MiamiStarter Vote](images/miamistarter-vote.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Live URL
@@ -10,15 +16,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Problem
 
-Talent and capital have often been cited as barriers to Miami's growth as the next tech hub. To become the next tech hub, Miami needs to attract and retain more tech talent in the city. Startups and tech workers are attracted to investment potential and innovation networks.
+Talent and capital have often been cited as barriers to Miami's growth as the next tech hub. To become the next tech hub, Miami needs to attract and retain more tech talent in the city. 
 
-MiamiCoin’s contributions to the city's treasury have grown to millions of dollars in just a few months, and Mayor Suarez and the City of Miami Commission have proposed several uses for the funds, including crypto education and incentives for tech entrepreneurs.
+Startups and tech workers are attracted to investment potential and innovation networks.
+
+MiamiCoin’s contributions to the city's treasury have grown to millions of dollars in just a few months, and Mayor Suarez and the City of Miami Commission have proposed several uses for the funds, including economics incentives for tech entrepreneurs.
 
 ## Enter MiamiStarter
 
 Miamistarter is a Web 3.0 app that allows $MIA token holders to vote on and/or invest in innovative crypto and tech startups based in Miami.
 
-MiamiStarter helps the city put the funds it receives via $MIA mining to attract crypto founders and other tech entrepreneurs to Miami, thereby growing Miami's tech ecosystem. Moreover, by requiring $MIA tokens to participate in the voting process, MiamiStarter creates an incentive for people to hold $MIA, thereby contributing to $MIA adoption in the city.
+MiamiStarter helps the city put the funds it receives via $MIA mining to attract crypto founders and other tech entrepreneurs to Miami, thereby growing Miami's tech ecosystem. 
+
+Moreover, by requiring $MIA tokens to participate in the voting process, MiamiStarter creates an incentive for people to hold $MIA, thereby contributing to $MIA adoption in the city.
 
 ## How MiamiStarter Works
 
