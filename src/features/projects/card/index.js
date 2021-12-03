@@ -43,8 +43,8 @@ export default function ProjectCard({
         src={imageUrl}
       />
       <Card.Body>
-        <Card.Title className="text-center">{title}</Card.Title>
-        <Card.Subtitle className="text-center">{tagline}</Card.Subtitle>
+        <Card.Title>{title}</Card.Title>
+        <Card.Subtitle>{tagline}</Card.Subtitle>
         <Card.Text>{description}</Card.Text>
         <Card.Text>
           {fundingRaised} of {fundingGoal} in $MIA raised

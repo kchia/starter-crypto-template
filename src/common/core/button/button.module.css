@@ -1,14 +1,16 @@
 .button {
-  background-color: #0091ea;
+  background-color: var(--dark-pink);
   border: none;
-  border-radius: 5px;
   color: #fff;
-  font-size: 12px;
-  font-weight: 400;
+  font-weight: 700;
   padding: 10px 20px;
-  text-transform: uppercase;
 }
 
 .button:disabled {
   background-color: lightblue;
+}
+
+.button:hover {
+  color: yellow;
+  transform: rotate(3deg);
 }

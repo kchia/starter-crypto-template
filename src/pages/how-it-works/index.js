@@ -28,8 +28,12 @@ export default function HowItWorks() {
         Suppose a project received 200 votes out of a possible 1000 total votes
         in a given cycle; in this case the startup is eligible to receive 20% of
         the funding pool. The $MIA tokens can either be cashed out to US dollars
-        to fund immediate needs or stacked to earn a yield and cashed out later
-        on. A smart contract, built on top of Stacks protocol, automates the
+        to fund immediate needs or stacked to earn a yield in $BTC/$STX and
+        cashed out later on.
+      </p>
+
+      <p>
+        A smart contract, built on top of Stacks protocol, automates the
         deposit, transfer, and withdrawal of funds.
       </p>
 

@@ -1,9 +1,10 @@
 .card {
   color: var(--black-primary);
-  padding: 10px;
   align-items: center;
   margin-bottom: 20px;
   border-radius: 0px;
+  padding: 0;
+  border: none;
 }
 
 .card:hover {
@@ -13,8 +14,8 @@
 }
 
 .img {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  border-radius: 0px;
 }
 
 .listGroupItem {
@@ -25,4 +26,18 @@
 
 .listGroupItem span {
   margin: 3px;
+}
+
+div .h5 {
+  padding: 100px;
+}
+
+.subtitle {
+}
+
+.card p {
+  font-size: 0.75em;
+  line-height: 1.4;
+  font-weight: 100;
+  color: var(--black-secondary);
 }

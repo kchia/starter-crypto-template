@@ -1,5 +1,6 @@
 .container {
-  margin: 60px;
+  padding: 60px;
+  width: 700px;
 }
 
 .title {

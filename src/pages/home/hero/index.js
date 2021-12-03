@@ -5,17 +5,19 @@ import styles from "./hero.module.css";
 export default function Hero() {
   return (
     <LazyHero
-      opacity={0.1}
+      opacity={0.5}
+      color="#ff89b4"
       isCentered={false}
       isFixed
       imageSrc="https://source.unsplash.com/2000x1000/?miami"
-      minHeight="80vh"
+      minHeight="70vh"
       className={styles.heroContainer}
     >
+      <div className={styles.textOverlay}></div>
       <h2>Invest in the Miami you believe in.</h2>
-      <h3>Vote on highly vetted ideas and teams based in Miami.</h3>
-      <h3>Or invest with $MIA.</h3>
-      {/* <Auth /> */}
+      <h4>Vote on highly vetted ideas and teams based in Miami.</h4>
+      <h4>Or invest with $MIA.</h4>
+      <Auth />
     </LazyHero>
   );
 }

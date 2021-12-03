@@ -1,17 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Smooch&family=Overpass&family=Permanent+Marker&display=swap");
+
 :root {
   --white-primary: #fff;
   --black-primary: #000;
   --black-secondary: #242526;
 
-  --background: var(--black-primary);
-  --text-color: var(--white-primary);
+  --background: var(--light-turquoise);
+  --text-color: var(--black-secondary);
+
+  --light-turquoise: #0febe3;
+  --dark-turquoise: #05b6c5;
+  --dark-pink: #f43086;
+  --light-pink: #ff89b4;
 }
 
 body {
-  background: var(--background);
   color: var(--text-color);
+  background: var(--light-turquoise); /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    var(--dark-pink),
+    var(--light-turquoise)
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    var(--dark-pink),
+    var(--light-turquoise)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: "Overpass", sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+main {
+  display: flex;
+  justify-content: center;
 }
 
 a:hover {
   color: yellow;
+}
+
+h2,
+h3 {
+  font-family: "Permanent Marker", cursive;
+}
+
+a {
+  color: var(--light-turquoise);
 }

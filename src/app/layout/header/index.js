@@ -8,11 +8,11 @@ export default function Header() {
     <header className={styles.headerContainer}>
       <div>
         <Link className={styles.headerLink} to="/">
-          <h1>MiamiStarter</h1>
+          <h1 className={styles.logo}>MiamiStarter</h1>
         </Link>
         <Navigation />
       </div>
-      {/* <Auth /> */}
+      <Auth />
     </header>
   );
 }
