@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { STATUS } from "../../common/constants";
 import { Button, Loader } from "../../common/core";
+import { shortenAddress } from "../../common/utils";
 import useConnect, { userSession } from "../../common/hooks/useConnect";
 
 import styles from "./auth.module.css";
@@ -68,7 +69,7 @@ export default function Auth({
     <Button text="connect to web3" handleClick={handleConnectButtonClick} />
   ) : (
     <>
-      <p>Connected:{userData.identityAddress}</p>
+      <p>Connected:{shortenAddress(userData.profile.stxAddress.testnet)}</p>
       <p>STX balance: {balance}</p>
       <Button text="log out" handleClick={handleLogoutButtonClick} />
     </>

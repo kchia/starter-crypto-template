@@ -4,7 +4,7 @@ import {
   Configuration,
 } from "@stacks/blockchain-api-client";
 
-import { COIN_MAP_DEVELOPMENT, STACKS_API_URL } from "../constants";
+import { COIN_MAP_DEVELOPMENT, STACKS_API_URL, ACCOUNTS } from "../constants";
 
 const BASE = 1_000_000;
 
@@ -47,6 +47,16 @@ export default function useStx() {
       principal: stacksAddress,
     });
 
+    if (stacksAddress === ACCOUNTS.contains_mia) {
+      balances.fungible_tokens = {
+        [COIN_MAP_DEVELOPMENT.MIA.contract]: {
+          balance: "251",
+          total_sent: "35000",
+          total_received: "35251",
+        },
+      };
+    }
+
     return balances;
   }
 
@@ -54,10 +64,10 @@ export default function useStx() {
     const { asset_class, contract } = COIN_MAP_DEVELOPMENT[coin];
 
     const validContract = contract
-      ? balances[asset_class].contract
+      ? balances[asset_class][contract]
       : balances[asset_class];
 
-    return validContract ? validContract.balance > 0 : false;
+    return validContract ? parseInt(validContract.balance) > 0 : false;
   }
 
   function balanceHasCoinMinimum(coin, minimumAmount, balances) {

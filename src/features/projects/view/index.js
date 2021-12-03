@@ -11,7 +11,12 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Row from "react-bootstrap/Row";
 
 import { STATUS } from "../../../common/constants";
-import { Button, ErrorFallback, Loader } from "../../../common/core";
+import {
+  Button,
+  ErrorFallback,
+  Loader,
+  Modal as VoteModal,
+} from "../../../common/core";
 import { logError } from "../../../common/utils";
 import { userSession } from "../../../common/hooks/useConnect";
 import useStx from "../../../common/hooks/useStx";
@@ -36,6 +41,7 @@ export default function ProjectView() {
     totalVotes: "",
   });
   const [canVote, setCanVote] = useState(false);
+  const [showVoteModal, setShowVoteModal] = useState(false);
   const { getAccountBalance, balanceHasCoin } = useStx();
 
   const { id } = useParams();
@@ -104,9 +110,18 @@ export default function ProjectView() {
   const { deadline = "", totalVotes } = funds;
 
   function handleVoteNowButtonClick() {
-    // open modal here
+    setShowVoteModal(true);
   }
 
+  function handleVoteModalCancelButtonClick() {
+    setShowVoteModal(false);
+  }
+
+  function handleVoteModalConfirmButtonClick() {
+    // call to Stacks smart contract
+    // show loading spinner
+    setShowVoteModal(false);
+  }
   const productCarousel = (
     <Carousel>
       <Carousel.Item>
@@ -268,7 +283,7 @@ export default function ProjectView() {
       </Card.Body>
       <Card.Body>
         <Card.Title>INVEST (COMING SOON!)</Card.Title>
-        <Button text="invest with $MIA" disabled />
+        <Button text="invest with $mia" disabled />
       </Card.Body>
       <Card.Body>
         <Card.Title>SELECT A PERK (COMING SOON!)</Card.Title>
@@ -316,6 +331,15 @@ export default function ProjectView() {
           {aboutView}
         </Col>
         <Col md={4}>{actionCard}</Col>
+        <VoteModal
+          handlePrimaryButtonClick={handleVoteModalConfirmButtonClick}
+          handleSecondaryButtonClick={handleVoteModalCancelButtonClick}
+          heading={`Vote for ${title}`}
+          body="You can only cast a vote once per funding cycle, and you cannot undo your vote, which will be recorded on the Stacks blockchain, so think carefully before confirming your vote!"
+          secondaryText="cancel"
+          primaryText="confirm"
+          show={showVoteModal}
+        />
       </Row>
     </Container>
   );
