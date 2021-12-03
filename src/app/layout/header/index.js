@@ -12,7 +12,7 @@ export default function Header() {
         </Link>
         <Navigation />
       </div>
-      <Auth />
+      {/* <Auth /> */}
     </header>
   );
 }

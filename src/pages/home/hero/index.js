@@ -15,7 +15,7 @@ export default function Hero() {
       <h2>Invest in the Miami you believe in.</h2>
       <h3>Vote on highly vetted ideas and teams based in Miami.</h3>
       <h3>Or invest with $MIA.</h3>
-      <Auth />
+      {/* <Auth /> */}
     </LazyHero>
   );
 }
