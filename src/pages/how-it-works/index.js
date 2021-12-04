@@ -5,17 +5,17 @@ export default function HowItWorks() {
     <section className={styles.container}>
       <h2 className={styles.title}>How it works</h2>
       <p>
-        Each funding cycle lasts for 30 days. Prior to the start of each cycle,
-        the city's municipal government vets projects from Miami-based
-        businesses and features them on MiamiStarter. The city also releases a
-        set amount of funding, in the form of $MIA tokens, into a smart
-        contract.
+        Funding would be determined in 30-day cycles. Prior to the start of each
+        funding cycle, interested Miami-based entrepreneurs would post their
+        projects on MiamiStarter. The city would also release a set amount of
+        funding, for example 1,000,000 $MIA tokens in this case, into a smart
+        contract on the Stacks blockchain.
       </p>
       <p>
-        During each cycle, $MIA token holders can review and vote on project
-        proposals featured on MiamiStarter. To do so, users must possess a
-        Stacks wallet (i.e., Hiro) that holds a minimum balance of $MIA tokens.
-        Each user can only cast one vote in each funding cycle.
+        Then during each cycle, $MIA token holders can review and vote on
+        project proposals featured on MiamiStarter. To do so, users must possess
+        a Stacks wallet, such as the Hiro wallet, that holds a minimum balance
+        of $MIA tokens. Each user can only cast one vote in each funding cycle.
       </p>
       <p>
         Besides voting, users can directly invest in projects using $MIA tokens.
@@ -33,8 +33,9 @@ export default function HowItWorks() {
       </p>
 
       <p>
-        A smart contract, built on top of Stacks protocol, automates the
-        deposit, transfer, and withdrawal of funds.
+        A smart contract, built on top of Stacks protocol, keeps track of the
+        votes received by each project and automates the deposit, transfer, and
+        withdrawal of funds for the whole funding process.
       </p>
 
       <section>

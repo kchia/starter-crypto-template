@@ -36,7 +36,7 @@ Moreover, by requiring $MIA tokens to participate in the voting process, MiamiSt
 
 ## How MiamiStarter Works
 
-Each funding cycle lasts for 30 days. Prior to the start of each cycle, the city's municipal government vets projects from Miami-based businesses and features them on MiamiStarter. The city also releases a set amount of funding, in the form of $MIA tokens, into a smart  contract.
+Each funding cycle lasts for 30 days. Prior to the start of each cycle, the City of Miami's commission vets projects from Miami-based businesses and features them on MiamiStarter. The city also releases a set amount of funding, in the form of $MIA tokens, into a smart  contract.
 
 During each cycle, $MIA token holders can review and vote on project proposals featured on MiamiStarter. To do so, users must possess a Stacks wallet (i.e., Hiro) that holds a minimum balance of $MIA tokens. Each user can only cast one vote in each funding cycle.
 
@@ -52,7 +52,7 @@ At the end of each cycle, each project would receive an amount of $MIA token tha
    
 3. On the MiamiStarter app, press the `connect to web3` button to log into MiamiStarter with your wallet.
    
-4. Select a project that you'd like to vote on or invest in directly by clicking on the project card. You'll then be taken to the individual project page. If your wallet contains some $MIA tokens, then you will see a card containing voting details on the right side of the project page, as follows:
+4. Select a project that you'd like to vote on or invest in directly by clicking on the project card. You'll then be taken to the individual project page. If you are logged in and your wallet contains some $MIA tokens, then you will see a card containing voting details and a "vote now" button on the right side of the project page, as follows:
 
 ![MiamiStarter Vote 2](images/miamistarter-vote-2.png)
 
@@ -122,9 +122,10 @@ The following principles were applied in the design of the folder structure:
 
 ## Next Steps
 
+- Create a New Project intake form so that entrepreneurs can submit their projects to be considered for funding on MiamiStarter
 - Testing apps that rely on $MIA to work is currently difficult since $MIA is not available via any testnet faucets (not that I know of), so perhaps it would be helpful to create such a faucet on testnet so the future developers can more easily test their applications
 - Allow the user to send $MIA directly to the wallet associated with each project as a direct investment
-- Create a (Stacks) smart contract that allows project supporters to mint NFTs as perks in the Stacks network
+- Create a (Stacks) smart contract that allows project supporters to mint NFTs as perks in the Stacks network. The NFTs would in turn grant them special privileges to a project, such as gaining early access to products or special discounts.
 - Create a (Stacks) smart contract to keep track of the number of votes and amount of funding received for each project
 
 ## Installation
