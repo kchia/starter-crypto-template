@@ -131,6 +131,8 @@ The following principles were applied in the design of the folder structure:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Note that you'd need to install the [Hiro wallet](https://www.hiro.so/wallet) as a browser extension.
+
 ### Running the project locally
 
 First, fork and then clone the project locally.

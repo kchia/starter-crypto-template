@@ -78,11 +78,11 @@ export default function ProjectView() {
         const balances = await getAccountBalance(stxAddress);
         setCanVote(balanceHasCoin("MIA", balances));
       } catch (error) {
-        console.log(error);
+        handleError(error);
       }
     }
     getAccountBalanceOnTestnet();
-  }, [getAccountBalance, balanceHasCoin, setCanVote]);
+  }, [getAccountBalance, balanceHasCoin, setCanVote, handleError]);
 
   const {
     logo,

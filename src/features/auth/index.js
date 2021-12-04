@@ -47,11 +47,11 @@ export default function Auth({
         const balances = await getAccountBalance(stxAddress);
         setBalance(balances.stx.balance / 1000000);
       } catch (error) {
-        console.log(error);
+        handleError(error);
       }
     }
     getAccountBalanceOnTestnet();
-  }, [getAccountBalance]);
+  }, [getAccountBalance, handleError]);
 
   async function handleConnectButtonClick() {
     try {
