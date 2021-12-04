@@ -1,6 +1,6 @@
 # MiamiStarter
 
-Miamistarter is a Web 3.0 app that allows $MIA token holders to vote on and/or invest in innovative crypto and tech startups based in Miami.
+Miamistarter is a Web 3.0 app that allows $MIA token holders to vote on and/or invest in innovative crypto and tech startups based in Miami. Users can log into the app using a Stacks wallet such as [Hiro](https://www.hiro.so/wallet).
 
 ![MiamiStarter Home](images/miamistarter-home.png)
 
@@ -8,11 +8,13 @@ Miamistarter is a Web 3.0 app that allows $MIA token holders to vote on and/or i
 
 ![MiamiStarter Vote](images/miamistarter-vote.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Deployed Site URL
 
-## Live URL
+The project has been deployed to [Heroku: MiamiStarter](https://miamistarter.herokuapp.com).
 
-[MiamiStarter](https://miamistarter.herokuapp.com)
+## Presentation URL
+
+[YouTube: MiamiStarter Presentation]()
 
 ## Problem
 
@@ -20,7 +22,9 @@ Talent and capital have often been cited as barriers to Miami's growth as the ne
 
 Startups and tech workers are attracted to investment potential and innovation networks.
 
-MiamiCoin’s contributions to the city's treasury have grown to millions of dollars in just a few months, and Mayor Suarez and the City of Miami Commission have proposed several uses for the funds, including economics incentives for tech entrepreneurs.
+MiamiCoin’s contributions to the city's treasury have grown to tens of millions of dollars, and Mayor Suarez and the City of Miami Commission have proposed several uses for the funds, including creating economic incentives for tech entrepreneurs.
+
+Using MiamiStarter, $MIA token holders can directly invest in and vote on startups and businesses that they think the city should support.
 
 ## Enter MiamiStarter
 
@@ -42,13 +46,32 @@ At the end of each cycle, each project would receive an amount of $MIA token tha
 
 ## How to Use MiamiStarter
 
-1. Install the [Hiro Wallet](https://www.hiro.so/wallet), which is a Stacks wallet. The wallet allows you to connect to MiamiStarter using your digital assets and identity.        
-2. Acquire MiamiCoin ($MIA) either by buying from okcoin.com or by mining.          
-3. Login to MiamiStarter with your wallet, which must have some $MIA tokens.          
-4. Vote on or invest directly in projects with $MIA.
+1. Install the [Hiro Wallet](https://www.hiro.so/wallet) in your browser. The Stacks wallet allows you to connect to MiamiStarter using your digital assets and identity on the Stacks blockchain.
 
-## Repo Structure
+2. Acquire MiamiCoin ($MIA) either by buying the token from okcoin.com or [by mining](https://minemiamicoin.com/).
+   
+3. On the MiamiStarter app, press the `connect to web3` button to log into MiamiStarter with your wallet.
+   
+4. Select a project that you'd like to vote on or invest in directly by clicking on the project card. You'll then be taken to the individual project page. If your wallet contains some $MIA tokens, then you will see a card containing voting details on the right side of the project page, as follows:
 
+![MiamiStarter Vote 2](images/miamistarter-vote-2.png)
+
+If you press the `vote now` button, a confirmation modal would appear on the screen, as follows:
+
+![MiamiStarter Vote Now Pressed](images/miamistarter-vote-now-pressed.png)
+
+Press confirm to cast a vote, or cancel to close the modal.
+
+However, if your wallet does not contain any $MIA token, then the `vote now` button would be disabled on the project page, as follows:
+
+![MiamiStarter No MIA Token](images/miamistarter-no-mia-token.png)
+
+Whenever you're done, you can press the `log out` button to disconnect your wallet and log out of the app.
+## Directory Structure
+
+- `/.github/workflows`: contains the configuration files for building and deploying the app automatically
+- `/images`: contains images for the readme
+- `/public`: contains the `index.html` file where the compiled scripts will be attached during the build process
 - `/src`
   - `/api`
     - `client.js`: a client wrapper around the Fetch API that supports `GET`, `POST`, `PUT`, and `DELETE` requests
@@ -57,8 +80,8 @@ At the end of each cycle, each project would receive an amount of $MIA token tha
       - `/footer`: contains the `Footer` component and css file
       - `/header`: contains the `Header` component and css file
       - `/navigation`: contains the `Navigation` component and css file
+      - `/route-with-error-boundary`: contains the `RouteWithErrorBoundary` component, which wraps other components with an error boundary
       - `index.js`: defines and exports the `Layout` component, which contains the routing for the application
-      - `layout.module.css`
     - `index.js`: exports the `App` component, which can render different layouts
     - `store.js`: configures and exports the Redux store
   - `/common`: contains code used across components annd throughout the application
@@ -66,29 +89,18 @@ At the end of each cycle, each project would receive an amount of $MIA token tha
     - `/core`: contains generic components (e.g., `Button`, `Modal`, `Loader`, etc.)
     - `/utils`: contains utility functions (e.g., `formatNumber()`)
   - `/features`: contains the code for the main features of the application
-    - `/coins`: contains all files related to the `coins` feature
-      - `/list`: contains the `CoinsList` component, test, css, and test data files
-      - `/view`: contains the `CoinView` component, test, css, and test data files
-      - `coins.service.js`: contains all API logic for the coins feature
-    - `/collectibles`: contains all files related to the `collectibles` feature
-      - `/list`
-      - `/view`
-      - `collectibles.service.js`
-    - `/favorites`: contains all files related to the `favorites` feature
-      - `/create`
-      - `/edit`
-      - `/list`
-      - `favorites.service.js`
-    - `/no-match`
-      - `index.js`
+    - `/auth`: contains all files related to the `auth` feature
+    - `/projects`: contains all files related to the `projects` feature, which includes the `ProjectCard`, `ProjectsList` and `ProjectView` components.
     - `index.js`: exports the components from the `/features` folder
   - `/styles`
     - `global.css`: contains global css styles used throughout the application
+  - `/pages`: contains components that each represents a page of the application
   - `index.js`: entry point to the React Application
   - `setupTests.js`: import any additional libraries used to extend test functionality (e.g, `jest-dom`)
-- `.env`: contains environment variables (typically added to `.gitignore`)
-- `db.json`: JSON database for your fake REST API
-- `routes.json`: routing logic for your fake REST API
+- `createFakeData.js`: a script that is run in Node.js to populate `db.json` with fake projects data for the frontend
+- `server.js`: server middleware configuration
+- `db.json`: JSON database for the REST API
+- `routes.json`: routing logic for the REST API
 
 The following principles were applied in the design of the folder structure:
 
@@ -102,21 +114,39 @@ The following principles were applied in the design of the folder structure:
 
 ## User Stories
 
-1. As a user, I want to connect my Stacks wallet to the website, so that I can vote on projects.
-2. As a user, I want to view a list of projects, so that I can view the most important information about each project.
+1. As a user, I want to view a list of projects, so that I can view the most important information about each project.
+2. As a user, I want to connect my Stacks wallet to the website, so that I can vote on projects.
 3. As a user, I want to view a specific project, so that I can get more specific information about the project and vote on/invest in the project.
+   1. I can only vote on projects if I have a non-zero amount of $MIA in my wallet
+   2. I can only vote once per funding cycle, on a single project
 
-## Available Scripts
+## Next Steps
 
-In the project directory, you can run:
+- Testing apps that rely on $MIA to work is currently difficult since $MIA is not available via any testnet faucets (not that I know of), so perhaps it would be helpful to create such a faucet on testnet so the future developers can more easily test their applications
+- Allow the user to send $MIA directly to the wallet associated with each project as a direct investment
+- Create a (Stacks) smart contract that allows project supporters to mint NFTs as perks in the Stacks network
+- Create a (Stacks) smart contract to keep track of the number of votes and amount of funding received for each project
 
-### `yarn start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Running the project locally
+
+First, fork and then clone the project locally.
+
+In the project root, you can run `yarn install` to install the frontend and smart contract dependencies.
+
+Then run `yarn start` which concurrently runs the app in the development mode, and starts a REST API at `http://localhost:3004` (for serving the mock projects data).
+
+Open [http://localhost:3000](http://localhost:3000) to view the app in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+## Other Scripts
+
+In the project directory, you can run:
 
 ### `yarn test`
 

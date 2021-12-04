@@ -353,6 +353,7 @@ export default function ProjectView() {
         </Col>
         <Col md={4}>{actionCard}</Col>
         <VoteModal
+          handleClose={handleVoteModalCancelButtonClick}
           handlePrimaryButtonClick={handleVoteModalConfirmButtonClick}
           handleSecondaryButtonClick={handleVoteModalCancelButtonClick}
           heading={`Vote for ${title}`}

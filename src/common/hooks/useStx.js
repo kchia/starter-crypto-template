@@ -47,6 +47,8 @@ export default function useStx() {
       principal: stacksAddress,
     });
 
+    // $MIA is not yet available on testnet, so here
+    // we simulate a wallet with some $MIA
     if (stacksAddress === ACCOUNTS.contains_mia) {
       balances.fungible_tokens = {
         [COIN_MAP_DEVELOPMENT.MIA.contract]: {
