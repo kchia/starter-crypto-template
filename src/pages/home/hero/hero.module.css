@@ -14,7 +14,7 @@
   position: absolute;
   background-color: var(--black-primary);
   opacity: 0.4;
-  height: 50%;
+  height: 60%;
   width: 50%;
   z-index: 1;
   left: 80px;
@@ -35,6 +35,7 @@
 
 .heroContainer .fundingPoolSize {
   color: yellow;
+  font-size: 1.3em;
   font-weight: 900;
   font-style: italic;
 }
