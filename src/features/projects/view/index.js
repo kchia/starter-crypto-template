@@ -72,13 +72,15 @@ export default function ProjectView() {
 
   useEffect(() => {
     async function getAccountBalanceOnTestnet() {
-      try {
-        const userData = userSession.loadUserData();
-        const stxAddress = userData.profile.stxAddress.testnet;
-        const balances = await getAccountBalance(stxAddress);
-        setCanVote(balanceHasCoin("MIA", balances));
-      } catch (error) {
-        handleError(error);
+      if (userSession.isUserSignedIn()) {
+        try {
+          const userData = userSession.loadUserData();
+          const stxAddress = userData.profile.stxAddress.testnet;
+          const balances = await getAccountBalance(stxAddress);
+          setCanVote(balanceHasCoin("MIA", balances));
+        } catch (error) {
+          handleError(error);
+        }
       }
     }
     getAccountBalanceOnTestnet();
