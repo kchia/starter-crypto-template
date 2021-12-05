@@ -41,13 +41,15 @@ export default function Auth({
 
   useEffect(() => {
     async function getAccountBalanceOnTestnet() {
-      try {
-        const userData = userSession.loadUserData();
-        const stxAddress = userData.profile.stxAddress.testnet;
-        const balances = await getAccountBalance(stxAddress);
-        setBalance(balances.stx.balance / 1000000);
-      } catch (error) {
-        handleError(error);
+      if (userSession.isUserSignedIn()) {
+        try {
+          const userData = userSession.loadUserData();
+          const stxAddress = userData.profile.stxAddress.testnet;
+          const balances = await getAccountBalance(stxAddress);
+          setBalance(balances.stx.balance / 1000000);
+        } catch (error) {
+          handleError(error);
+        }
       }
     }
     getAccountBalanceOnTestnet();
