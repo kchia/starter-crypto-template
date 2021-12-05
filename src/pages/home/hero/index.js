@@ -17,6 +17,10 @@ export default function Hero() {
       <h2>Invest in the Miami you believe in.</h2>
       <h4>Vote on highly vetted ideas and teams based in Miami.</h4>
       <h4>Or invest with $MIA.</h4>
+      <h4>
+        Current Funding Pool Size:{" "}
+        <span className={styles.fundingPoolSize}>1,000,000 ($MIA)</span>
+      </h4>
       <Auth displayWalletInfo={false} />
     </LazyHero>
   );
