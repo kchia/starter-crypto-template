@@ -14,7 +14,7 @@ The project has been deployed to [Heroku: MiamiStarter](https://miamistarter.her
 
 ## Presentation URL
 
-[YouTube: MiamiStarter Presentation]()
+[YouTube: MiamiStarter Presentation](https://youtu.be/-cCKHwqhijM)
 
 ## Problem
 
