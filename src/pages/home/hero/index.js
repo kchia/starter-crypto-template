@@ -19,7 +19,7 @@ export default function Hero() {
       <h4>Or invest with $MIA.</h4>
       <h4>
         Current Cycle Funding Pool:{" "}
-        <span className={styles.fundingPoolSize}>1,000,000 ($MIA)</span>
+        <span className={styles.fundingPoolSize}>1,000,000 STX</span>
       </h4>
       <Auth displayWalletInfo={false} />
     </LazyHero>
