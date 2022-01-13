@@ -23,3 +23,10 @@
 .logo:hover {
   font-size: 66px;
 }
+
+@media (max-width: 600px) {
+  .headerContainer,
+  .headerContainer div {
+    flex-direction: column;
+  }
+}

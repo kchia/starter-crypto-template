@@ -39,3 +39,29 @@
   font-weight: 900;
   font-style: italic;
 }
+
+@media (max-width: 1024px) {
+  .textOverlay {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .textOverlay {
+    height: 100%;
+    width: 100%;
+    left: 0px;
+  }
+
+  .heroContainer div {
+    text-align: center;
+  }
+
+  .heroContainer h2 {
+    padding: 10px;
+  }
+
+  .heroContainer h4 {
+    padding: 10px;
+  }
+}
